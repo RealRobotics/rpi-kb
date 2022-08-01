@@ -1,8 +1,8 @@
-l# How to connect to eduroam
+# How to connect to eduroam
 
 This is pretty straightforward once you know how.
 
-Mostly based off this:
+Based off this:
 <https://scholarslab.lib.virginia.edu/blog/raspberry-pi-uva-eduroam/>
 but with tweaks from a working setup.
 
@@ -14,6 +14,8 @@ You need to install network manager first.  To do this, connect to your phone ho
 sudo apt update
 sudo apt install network-manager network-manager-gnome
 ```
+
+__DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
 
 Then modify the following files:
 
@@ -33,6 +35,7 @@ Reboot.
 
 Eduroam can now be selected on the Network Manager icon.
 
+```bash
 # cat /media/andy/root/etc/NetworkManager/system-connections/eduroam 1
 [wifi-security]
 key-mgmt=wpa-eap
@@ -67,7 +70,9 @@ password-flags=2
 [ipv4]
 method=auto
 cat: 1: No such file or directory
+```
 
+## MAYBE MOVE THIS SECTION
 
 ## Set locale
 
