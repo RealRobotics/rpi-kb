@@ -9,10 +9,6 @@ __However, due to the often lax security on Raspberry Pis caused by poor passwor
 
 The documentation for confecting to Eduroam is [here](eduroam/eduroam.md).
 
-## Add more here
-
-TODO
-
 ## Acknowledgments
 
 &copy; 2022, University of Leeds.

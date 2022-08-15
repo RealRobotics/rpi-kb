@@ -66,12 +66,13 @@ As the password that you have just entered is held in a plain text file, it is m
 
 1. Ensure that you are disconnected from Eduroam.
 2. List all system connection files using `ls /etc/NetworkManager/system-connections/`.
-3. There may be more than one systems connection file for Eduroam,
+3. There may be more than one systems connection file for Eduroam, so choose the latest one (highest number).
 4. Edit the file `/etc/NetworkManager/system-connections/eduroam` using `nano` or similar.
 5. Find section `[802-1x]` and change the line `password=XXXXXXXXXX` to   `password-flags=2`.
 6. Save and exit the editor.
 7. Try to connect to Eduroam.  You should now be prompted to enter your password.
+8. If this works correctly, delete any other system connection files.
 
 ### Example system connection file
 
-[This is what a working system connection file looks like.](eduroam/working_files/eduroam)
+[This is what a working system connection file looks like.](working_files/eduroam)
