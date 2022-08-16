@@ -27,7 +27,7 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
     |Inner authentication:| `MSCHAPV2`|
     |Username:| `username@leeds.ac.uk`|
     |Password:| `xxxxxxxx`|
-    NOTE: REtest this and take screen shots.  It think there is a check box to tick.
+    TODO : REtest this and take screen shots.  It think there is a check box to tick.
 
     All other fields should be left blank.  Replace `username` with your username and `xxxxxxxx` with your password.  Press `OK` and then try connecting to Eduroam.  If all goes well, you should be able to connect.
 4. Finally for this section, remove the old network applet as follows.  Right click menu bar on top of screen -> open "Panel Settings" -> "Panel Applets": remove "Wireless & Wired Network".  To keep things tidy, you also need to remove the spacer.  Right click on the space where the network icon used to be and select 'Remove "Spacer"'.
@@ -42,7 +42,11 @@ As the password that you have just entered is held in a plain text file, it is m
 4. Save and exit the editor.
 5. Try to connect to Eduroam.  You should now be prompted to enter your password.  If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password, see below for details.
 
-### Using `nmtui`
+## Changing the username
+
+TODO Test that this is possible.
+
+## Using `nmtui`
 
 The `nmtui` utility is an ncurses implementation of the Network Manager application and because it can be invoked with `sudo`, it works when the full Network Manager application doesn't behave.
 
