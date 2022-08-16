@@ -4,9 +4,9 @@ This repo contains information on how to set up Raspberry Pis for work with robo
 
 ## SD card images
 
-Raspberry Pi provides a nice tool to download and create an SD card image for the operating system (OS) along with great instructions, so use them! [See here for details.](https://www.raspberrypi.com/software/)
+Raspberry Pi provides a nice imager tool to download and create an SD card image for the operating system (OS) along with great instructions, so use them! [See here for details.](https://www.raspberrypi.com/software/)
 
-For robotics use, the preferred OS is Ubuntu 20.04 or 22.04, 64 bit. Both are available on the Raspberry Pi imager.
+For robotics use, the preferred OS is Ubuntu 20.04 or 22.04, 64 bit.  This is best if you use ROS as the packages are prebuilt for the Pi so can be installed without building from source.
 
 For general purpose use, the Raspberry Pi OS with desktop (32 bit) is best. This release has all the recommended software and has the best online support.
 
