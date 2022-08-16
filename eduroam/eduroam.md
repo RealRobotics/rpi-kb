@@ -16,6 +16,8 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
     ```
 
     __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
+
+    For your convenience, the script `eduroam.bash` does all this for you, so you can clone this repo and then run the script.
 2. Reboot (`sudo reboot` works well).
 3. The network manager icon should now be shown at the top of the screen.  Select Eduroam and try to connect.  A dialog box should be shown where you can enter the info as shown below:
 
