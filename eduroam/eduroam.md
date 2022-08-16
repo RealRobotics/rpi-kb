@@ -1,77 +1,60 @@
 # How to connect to eduroam
 
-Tested on the latest Raspberry Pi OS based on the Debian Bullseye release
+Most of the instructions were found in [this IT knowledge base article, method 2.](https://it.leeds.ac.uk/it?id=kb_article&sysparm_article=KB0012058)  I have copied them here to save looking them up and added extra notes.
+
+Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye release
 (4 April 2022).
-
-
-Based off this:
-<https://scholarslab.lib.virginia.edu/blog/raspberry-pi-uva-eduroam/>
-but with tweaks from a working setup.
-
-This also looks useful but has not been tested.
-<https://it.leeds.ac.uk/it?id=kb_article&sysparm_article=KB0012058>
-
 
 ## Install NetworkManager
 
-You need to install network manager first.  To do this, connect to your phone hotspot and once connected run the following commands:
+1. You need to install network manager first.  To do this, connect to your phone hotspot and once connected run the following commands:
 
-```bash
-sudo apt update
-sudo apt install network-manager network-manager-gnome
-```
+    ```bash
+    sudo apt update
+    sudo apt install network-manager network-manager-gnome openvpn openvpn-systemd-resolved network-manager-openvpn network-manager-openvpn-gnome
+    sudo apt purge openresolv dhcpcd5
+    sudo ln -sf /lib/systemd/resolv.conf /etc/resolv.conf
+    ```
 
-__DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
+    __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
+2. Reboot.
+3. The network manager icon should now be shown at the top of the screen.  Select Eduroam and try to connect.  A dialog box should be shown whwhere you can enter the following info.
+    | | |
+    |---|---|
+    |Security: |`WPA/WPA2 Enterprise`|
+    |Authentication:| `Protected EAP (PEAP)`|
+    |PEAP version:| `Automatic`|
+    |Inner authentication:| `MSCHAPV2`|
+    |Username:| `username@leeds.ac.uk`|
+    |Password:| `xxxxxxxx`|
 
-Then modify the following files:
-
-```bash
-sudo nano /etc/dhcpcd.conf
-```
-
-Add this line to the bottom of the file, then save and close.
-
-```bash
-denyinterfaces wlan0
-```
-
-Then do this:
-
-```bash
-sudo nano /etc/NetworkManager/NetworkManger.conf
-```
-
-Add `dchp=internal` to the file and change managed to true, then save and close the file.
-
-Reboot.
-
-Eduroam can now be selected on the Network Manager icon.
-
-Connect to Eduroam filling out the following fields of the Wi-Fi Security Tab:
-| | |
-|---|---|
-|Security: |`WPA/WPA2 Enterprise`|
-|Authentication:| `Protected EAP (PEAP)`|
-|Domain:| `leeds.ac.uk`|
-|PEAP version:| `Automatic`|
-|Inner authentication:| `MSCHAPV2`|
-|Username:| `username@leeds.ac.uk`|
-|Password:| `xxxxxxxx`|
-
-All other fields should be left blank.  Replace `username` with your username and `xxxxxxxx` with your password.  Press `OK` and then try connecting to Eduroam.  If all goes well, you should be able to connect.
+    All other fields should be left blank.  Replace `username` with your username and `xxxxxxxx` with your password.  Press `OK` and then try connecting to Eduroam.  If all goes well, you should be able to connect.
+4. Finally for this section, remove the old network applet as follows.  Right click menu bar on top of screen -> open "Panel Settings" -> "Panel Applets": remove "Wireless & Wired Network".  To keep things tidy, you also need to remove the spacer.  Right click on the space where the network icon used to be and select 'Remove "Spacer"'.
 
 ## Forcing password entry
 
-As the password that you have just entered is held in a plain text file, it is much better to force the user to enter their password every time they connect to the network.
+As the password that you have just entered is held in a plain text file, it is much more secure to force the user to enter their password every time they connect to the network.
 
 1. Ensure that you are disconnected from Eduroam.
 2. List all system connection files using `ls /etc/NetworkManager/system-connections/`.
 3. There may be more than one systems connection file for Eduroam, so choose the latest one (highest number).
-4. Edit the file `/etc/NetworkManager/system-connections/eduroam` using `nano` or similar.
+4. Edit the file `/etc/NetworkManager/system-connections/eduroam` using `sudo nano` or similar.
 5. Find section `[802-1x]` and change the line `password=XXXXXXXXXX` to   `password-flags=2`.
 6. Save and exit the editor.
-7. Try to connect to Eduroam.  You should now be prompted to enter your password.
-8. If this works correctly, delete any other system connection files.
+7. Try to connect to Eduroam.  You should now be prompted to enter your password.  If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password, seel below for details.
+8. If this works correctly, delete any other `eduroam` system connection files.
+9. Finally, remove the now defunct Network Status Monitor icon ![Network Status Monitor](pi-wifi-icon-not-connected.png "Network Status Monitor") at the top of the screen .  Right click on the icon, and select the option `Remove "Network Status Monitor" From Panel`.  If there is a big gap in the applets, the spacing between the icons can be modified by right clicking on any of the applets, select `Panel Settings` and then select the `Panel Applets` tab and delete the offending spacer.
+
+### Using `nmtui`
+
+The `nmtui` utility is an ncurses implementation of the Network Manager application and because it can be invoked with `sudo`, it works when the full Network Manager application doesn't behave.
+
+The following shows you how to enter your `eduroam` user name and password.
+
+1. In a terminal window, enter `sudo nmtui`.
+2. Use the arrow keys to select "Activate a connection" and press enter.
+3. Select `eduroam` and press enter.
+4. You should now be prompted to enter your username and password.  Do this and press enter.  After a few seconds, you should be connected.
 
 ### Example system connection file
 
