@@ -7,7 +7,7 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
 
 ## Install NetworkManager
 
-1. You need to install network manager first.  To do this, connect to your phone hotspot and once connected run the following commands:
+1. You need to install network manager first.  To do this, connect the Raspberry Pi to your phone hotspot (or teher to your phone using Bluetooth) and once connected run the following commands:
 
     ```bash
     sudo apt update
@@ -18,7 +18,7 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
 
     __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
 2. Reboot.
-3. The network manager icon should now be shown at the top of the screen.  Select Eduroam and try to connect.  A dialog box should be shown whwhere you can enter the following info.
+3. The network manager icon should now be shown at the top of the screen.  Select Eduroam and try to connect.  A dialog box should be shown where you can enter the following info.
     | | |
     |---|---|
     |Security: |`WPA/WPA2 Enterprise`|
@@ -27,6 +27,7 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
     |Inner authentication:| `MSCHAPV2`|
     |Username:| `username@leeds.ac.uk`|
     |Password:| `xxxxxxxx`|
+    NOTE: REtest this and take screen shots.  It think there is a check box to tick.
 
     All other fields should be left blank.  Replace `username` with your username and `xxxxxxxx` with your password.  Press `OK` and then try connecting to Eduroam.  If all goes well, you should be able to connect.
 4. Finally for this section, remove the old network applet as follows.  Right click menu bar on top of screen -> open "Panel Settings" -> "Panel Applets": remove "Wireless & Wired Network".  To keep things tidy, you also need to remove the spacer.  Right click on the space where the network icon used to be and select 'Remove "Spacer"'.
@@ -36,14 +37,10 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
 As the password that you have just entered is held in a plain text file, it is much more secure to force the user to enter their password every time they connect to the network.
 
 1. Ensure that you are disconnected from Eduroam.
-2. List all system connection files using `ls /etc/NetworkManager/system-connections/`.
-3. There may be more than one systems connection file for Eduroam, so choose the latest one (highest number).
-4. Edit the file `/etc/NetworkManager/system-connections/eduroam` using `sudo nano` or similar.
-5. Find section `[802-1x]` and change the line `password=XXXXXXXXXX` to   `password-flags=2`.
-6. Save and exit the editor.
-7. Try to connect to Eduroam.  You should now be prompted to enter your password.  If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password, seel below for details.
-8. If this works correctly, delete any other `eduroam` system connection files.
-9. Finally, remove the now defunct Network Status Monitor icon ![Network Status Monitor](pi-wifi-icon-not-connected.png "Network Status Monitor") at the top of the screen .  Right click on the icon, and select the option `Remove "Network Status Monitor" From Panel`.  If there is a big gap in the applets, the spacing between the icons can be modified by right clicking on any of the applets, select `Panel Settings` and then select the `Panel Applets` tab and delete the offending spacer.
+2. Edit the file `/etc/NetworkManager/system-connections/eduroam` using `sudo nano` or similar.
+3. Find section `[802-1x]` and change the line `password=XXXXXXXXXX` to   `password-flags=2`.
+4. Save and exit the editor.
+5. Try to connect to Eduroam.  You should now be prompted to enter your password.  If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password, see below for details.
 
 ### Using `nmtui`
 
