@@ -6,6 +6,10 @@ This repo contains information on how to set up Raspberry Pis for work with robo
 
 Raspberry Pi provides a nice tool to download and create an SD card image for the operating system (OS) along with great instructions, so use them! [See here for details.](https://www.raspberrypi.com/software/)
 
+For robotics use, the preferred OS is Ubuntu 20.04 or 22.04, 64 bit. Both are available on the Raspberry Pi imager.
+
+For general purpose use, the Raspberry Pi OS with desktop (32 bit) is best. This release has all the recommended software and has the best online support.
+
 The micro SD card should be as fast as possible and 16GB or larger.  My personal preference is the 32GB SanDisk Extreme micro SD cards.  You can get them from [Amazon](https://www.amazon.co.uk/SanDisk-Extreme-microSDHC-Adapter-Performance/dp/B06XWMQ81P/ref=asc_df_B06XWMQ81P/) or Science Warehouse.
 
 ## Eduroam
