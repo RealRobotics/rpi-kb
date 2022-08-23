@@ -2,11 +2,14 @@
 
 Most of the instructions were found in [this IT knowledge base article, method 2.](https://it.leeds.ac.uk/it?id=kb_article&sysparm_article=KB0012058)  I have copied them here to save looking them up and added extra notes.
 
-Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye release (4 April 2022).
+Tested with:
+
+* Raspberry Pi OS with desktop and recommended software (32 bit), Debian Bullseye, 4 April 2022.
+* Raspberry Pi OS with desktop (64 bit), Debian Bullseye, 4 April 2022.
 
 ## Install NetworkManager
 
-1. You need to install network manager first.  To do this, connect the Raspberry Pi to your phone Wi-Fi hot spot or tether to your phone using a USB cable and once connected run the following commands:
+1. You need to install network manager first.  To do this, connect the Raspberry Pi to your phone Wi-Fi hot spot or tether to your phone using a USB cable and, once connected, run the following commands:
 
     ```bash
     sudo apt update
@@ -17,7 +20,15 @@ Tested on the latest Raspberry Pi OS (64 bit) based on the Debian Bullseye relea
 
     __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
 
-    For your convenience, the script `eduroam.bash` does all this for you, so you can clone this repo and then run the script.
+    For your convenience, the script `eduroam.bash` does all this for you, so you can clone this repo and then run the script as follows:
+
+    ```bash
+    cd ~
+    git clone https://github.com/RealRobotics/rpi-kb
+    cd rpi-kb/eduroam
+    ./eduroam.bash
+    ```
+
 2. Reboot (`sudo reboot` works well).
 3. The network manager icon should now be shown at the top of the screen.  Select Eduroam and try to connect.  A dialog box should be shown where you can enter the info as shown below:
 
@@ -42,7 +53,7 @@ As the password that you have just entered is held in a plain text file, it is m
 
     ![Enter Password Dialog](EnterPasswordDialog.png)
 
-    If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password, see below for details.
+    If you are not prompted and just have a dialog box "Connect" and "Cancel" button, use `nmtui` instead, to enter your username and password. See below for details.
 
 ### Example system connection file
 
