@@ -12,6 +12,10 @@ For general purpose use, the Raspberry Pi OS with desktop (32 bit) is best. This
 
 The micro SD card should be as fast as possible and 16GB or larger.  My personal preference is the 32GB SanDisk Extreme micro SD cards.  You can get them from [Amazon](https://www.amazon.co.uk/SanDisk-Extreme-microSDHC-Adapter-Performance/dp/B06XWMQ81P/ref=asc_df_B06XWMQ81P/) or Science Warehouse.
 
+### Back up and restore an image
+
+Once you have prepared an SD card, it is useful to be able to create a back up copy and restore the copy when needed.  This process is documented [here](backup/backup.md).
+
 ## Eduroam
 
 At home, it is natural to connect a Raspberry Pi to the internet using your home Wi-Fi.  Eduroam is the Wi-Fi network for the university so it is natural for Raspberry Pis to be connected to Eduroam at some point.
