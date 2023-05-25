@@ -24,6 +24,11 @@ __However, due to the often lax security on Raspberry Pis caused by poor passwor
 
 The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
+## Raspberry Pi accessing the internet via local router
+
+When working with robots, it is common to have a PC and the robots to communicate on a dedicated subnet.  See [my notes](network/network_router.md).
+
+
 ## Acknowledgments
 
 &copy; 2022, University of Leeds.
