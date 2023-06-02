@@ -2,9 +2,9 @@
 
 The use case is as follows:
 
-- The base station PC (normally someone's laptop) is connected to the internet via Wi-Fi.
-- The PC is connected to a Wi-Fi router via an Ethernet cable.
-- The Wi-Fi router is used to connect to the robots (often Raspberry Pi based).
+* The base station PC (normally someone's laptop) is connected to the internet via Wi-Fi.
+* The PC is connected to a Wi-Fi router via an Ethernet cable.
+* The Wi-Fi router is used to connect to the robots (often Raspberry Pi based).
 
 ## Set up router
 
@@ -18,7 +18,9 @@ The first thing to do is to do the basic setup of the Wi-Fi router.  The details
 
 ## Configure the PC
 
-TODO
+### Issues to solve
+
+* DNS screwing up.
 
 ### Share
 
@@ -185,15 +187,55 @@ iptables -A FORWARD -i wlan0 -o wlan1 -m state --state ESTABLISHED,RELATED -j AC
 iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
 ```
 
-This looks nice and easy.
+This looks nice and easy (but doesn't work!)
+
+<https://opensource.com/article/18/10/iptables-tips-and-tricks>
+
+Really useful basics.
+
+<https://medium.com/skilluped/what-is-iptables-and-how-to-use-it-781818422e52>
+
+This explains what IP tables does.
+
+<https://askubuntu.com/questions/466445/what-is-masquerade-in-the-context-of-iptables/466451#466451>
+
+<https://askubuntu.com/questions/1414579/ubuntu-22-04-shared-internet-connection-with-multiple-interfaces>
+
+Uses `dnsmasq`.
+
+<(https://askubuntu.com/questions/278349/how-to-share-a-wireless-connection-through-ethernet-with-fixed-ip-addresses)>
+
+This uses the built in shared connection but you are stuck with an IP address of 10.42.0.2/24.
+
+Close but no cigar...
+
+
 
 ## Notes
 
 These are the failed attempts.
 
+### Share same subnet with internet
+
+```text
+INTERNET_IF="wlp0s20f3"
+ROBOT_NETWORK_IF="enp0s31f6"
+
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo iptables -t nat -A POSTROUTING -o ${ROBOT_NETWORK_IF} -j MASQUERADE
+sudo iptables -A FORWARD -i ${INTERNET_IF} -o ${ROBOT_NETWORK_IF} -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i ${ROBOT_NETWORK_IF} -o ${INTERNET_IF} -j ACCEPT
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+sudo systemctl restart systemd-networkd
+```
+
+This allowed the Pi to `ping 8.8.8.8` but killed the DNS lookup on my PC and the Pi using `ping google.com`.
+
 ### Share same subnet without internet
 
-This is easy.
+Create wired connection on host PC.  Use manual IPV4 settings.
+IP address to 192.168.53.2, netmask 255.255.255.0, gateway 0.0.0.0.
+
 
 ### Share same subnet without internet using a bridge
 
