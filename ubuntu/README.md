@@ -42,7 +42,7 @@ Save and exit and reboot.
 First, install some useful scripts that make working with git much easier.  Open a terminal and enter:
 
 ```bash
-./install_libcamera.bash
+TODO!
 ```
 
 Now clone the `tankbot` repo and then run the script:
