@@ -16,6 +16,10 @@ The micro SD card should be as fast as possible and 16GB or larger.  My personal
 
 Once you have prepared an SD card, it is useful to be able to create a back up copy and restore the copy when needed.  This process is documented [here](backup/backup.md).
 
+### Customising Ubuntu 22.04LTS for the Raspberry Pi
+
+There are some useful tricks and tips for setting up Ubuntu for robotics use [here](ubuntu/README.md).  There are also some notes on using `libcamera` on the Raspberry Pi (22.04LTS does not have this working so you have to do a fair bit manually).
+
 ## Eduroam
 
 At home, it is natural to connect a Raspberry Pi to the internet using your home Wi-Fi.  Eduroam is the Wi-Fi network for the university so it is natural for Raspberry Pis to be connected to Eduroam at some point.

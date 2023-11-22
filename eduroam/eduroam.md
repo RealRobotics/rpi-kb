@@ -6,6 +6,9 @@ Tested with:
 
 * Raspberry Pi OS with desktop and recommended software (32 bit), Debian Bullseye, 4 April 2022.
 * Raspberry Pi OS with desktop (64 bit), Debian Bullseye, 4 April 2022.
+* Ubuntu Desktop 22.04.1 LTS ARM64.
+
+NOTE: The Ubuntu Desktop already has Network Manager installed, so just go to step 3 of the section below.
 
 ## Install NetworkManager
 
@@ -18,7 +21,7 @@ Tested with:
     sudo ln -sf /lib/systemd/resolv.conf /etc/resolv.conf
     ```
 
-    __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving lots of your precious data!
+    __DO NOT DO A FULL UPGRADE USING YOUR PHONE.__ The full update can be done once you are on Eduroam, saving your precious data!
 
     For your convenience, the script `eduroam.bash` does all this for you, so you can clone this repo and then run the script as follows:
 
