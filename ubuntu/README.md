@@ -47,9 +47,15 @@ First, install some useful scripts that make working with git much easier.  Open
 
 Now clone the `tankbot` repo and then run the script:
 
-
 ### Raspberry Pi Camera
 
 The setup of the Raspberry Pi Camera Module for Ubuntu 22.04LTS is a bit of a pain as the transition to using `libcamera` had not been fully implemented in this Ubuntu release.  I spent many, many hours trying different ways to make this work and in the end it was quite simple once you realise that you have to build and install the Raspberry Pi specific `libcamera` code.  To build and install the Raspberry Pi `libcamera` libraries and apps, run [this script](install_libcamera.bash).
 
 To run the camera with ROS 2, I found this repo that works well enough for what I needed, so I forked it as I needed to add launch files and a README. <https://github.com/pipebots/camera_ros/tree/add-launch-files>.
+
+One thing that you might need to use is a YAML configuration file to get this image sized correctly.
+
+#### References
+
+* <https://github.com/raspberrypi/libcamera> The repo for the code to build.
+* TODO There is a more detailed blog post somewhere but I cant find it!
