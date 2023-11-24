@@ -28,8 +28,12 @@ __However, due to the often lax security on Raspberry Pis caused by poor passwor
 
 The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
+## Libcamera on Ubuntu 22.04LTS
+
+ROS Humble and Iron both use Ubuntu 22.04LTS as their OS.  Unfortunately, the RPi camera v3 needs a later version of the Debian OS and kernel.  This makes things messy!
+
 ## Acknowledgments
 
-&copy; 2022, University of Leeds.
+&copy; 2022-2023, University of Leeds.
 
-The author, A. Blight, has asserted their moral rights.
+The author, A. Blight, has asserted his moral rights.
