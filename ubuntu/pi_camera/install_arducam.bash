@@ -9,6 +9,24 @@ echo
 echo "Running $0..."
 echo
 
+# Add build dependencies.  Should be pretty much the minimal set required.
+sudo apt update
+sudo apt install -y --no-install-recommends \
+    g++ meson ninja-build pkg-config \
+    libyaml-dev python3-yaml python3-ply python3-jinja2 \
+    libssl-dev openssl \
+    libdw-dev libunwind-dev \
+    libudev-dev libboost-dev \
+    libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+    libevent-dev \
+    libcamera-dev libjpeg-dev libtiff5-dev \
+    libavcodec-dev libavdevice-dev libavformat-dev libswresample-dev \
+    libgnutls28-dev openssl libtiff5-dev \
+    qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
+    python3-pip
+sudo pip3 install pyyaml ply
+sudo pip3 install --upgrade meson
+
 # libepoxy
 if [ ! -e /usr/local/lib/aarch64-linux-gnu/libepoxy.so ]
 then

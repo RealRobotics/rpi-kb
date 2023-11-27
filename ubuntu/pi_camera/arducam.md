@@ -1,6 +1,6 @@
 # Configuration for ArduCam
 
-The goal is to use the ArduCam B0310 12MP IMX708 camera with ROS Humble on a Raspberry Pi 4.
+The goal is to use the ArduCam B0310 12MP IMX708 camera with ROS Humble on a Raspberry Pi 4.  These instructions also work for the Raspberry Pi camera v3 as it uses the same kernel module and drivers.
 
 The key problems are:
 
@@ -64,33 +64,19 @@ The key problems are:
 
     And reboot again.  Once booted, verify that the new kernel is installed as follows:
 
-    ```bash
+    ```text
     $ uname -a
-
+    Linux ball-desktop 6.2.0-1017-raspi #19-Ubuntu SMP PREEMPT Mon Nov 13 15:35:19 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
     ```
-
-
 
 10. Clone this repo and install the `libcamera` and related code:
 
    ```bash
    cd ~/git
    git clone https://github.com/RealRobotics/rpi-kb.git
-   cd rpi-kb/ubuntu/arducam
-   ./install_libcamera.bash_
+   cd rpi-kb/ubuntu/pi_camera
+   ./install_arducam.bash
    ```
-
-
-
-## Lots of time later
-
-Built `libcamera` using the Raspberry Pi version of it.  Also needed `libepoxy`, `libpsip` and `rpicam-apps`.
-
-Code now worked but the camera was not seen by the drivers.  The kernel module ``
-
-Looks like we need to update the kernel.  Installed the HWE kernel, 6.2, but the install failed.  No `dtb-6.2...` directory.
-
-It looks like I need a Raspberry Pi 6.2 kernel not the generic.  No idea where to get one of them from!
 
 ## ArduCam notes
 

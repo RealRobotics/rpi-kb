@@ -1,17 +1,65 @@
 #!/bin/bash
+# Install and setup Raspberry Pi Camera packages.
 
-# Based on this page: https://github.com/raspberrypi/libcamera
-# There is a more detailed blog post somewhere but I cant find it!
+# Stop on first error.
+set -e
 
-echo "TO DO!"
+# Tell the user what is going on.
+echo
+echo "Running $0..."
+echo
 
-sudo apt install -y \
-    libyaml-dev python3-yaml python3-ply python3-jinja2 \
-    libdw-dev libunwind-dev \
-    libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
-    qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 qttools5-dev-tools libtiff-dev
+# libcamera
+if [ ! -e /usr/local/bin/cam ]
+then
+    # Get the code.
+    cd ~/git
+    git clone https://git.libcamera.org/libcamera/libcamera.git
+    cd libcamera
+    # Dependencies.  Should be pretty much the minimal set required.
+    sudo apt update
+    sudo apt install -y --no-install-recommends \
+        g++ meson ninja-build pkg-config \
+        libyaml-dev python3-yaml python3-ply python3-jinja2 \
+        libssl-dev openssl \
+        libdw-dev libunwind-dev \
+        libudev-dev libboost-dev \
+        libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+        libevent-dev \
+        libcamera-dev libjpeg-dev libtiff5-dev \
+        libavcodec-dev libavdevice-dev libavformat-dev libswresample-dev \
+        libgnutls28-dev openssl libtiff5-dev \
+        qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
+        python3-pip
+    sudo pip3 install pyyaml ply
+    sudo pip3 install --upgrade meson
+    # Build and install.
+    meson build --buildtype=release -Dpipelines=raspberrypi -Dipas=raspberrypi -Dv4l2=true -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=enabled -Dqcam=enabled -Ddocumentation=disabled
+    ninja -C build
+    sudo ninja -C build install
+fi
 
-pip3 install --user meson
-pip3 install --user --upgrade meson
+# libcamera-apps
+if [ ! -e /usr/local/bin/libcamera-hello ]
+then
+    # Get the code.
+    cd ~/git
+    git clone https://github.com/raspberrypi/libcamera-apps.git
+    cd libcamera-apps/
+    # Install dependencies.
+    mkdir -p build
+    cd build
+    cmake .. -DENABLE_DRM=1 -DENABLE_X11=1 -DENABLE_QT=1 -DENABLE_OPENCV=0 -DENABLE_TFLITE=0
+    make -j4
+    sudo make install
+    sudo ldconfig
+fi
 
-echo "Finish this off"
+# Add user to video group
+sudo adduser $USER video
+
+echo
+echo "Test using 'qcam' or 'libcamera-hello --qt-preview'."
+echo
+echo "$0 took $SECONDS seconds."
+echo
