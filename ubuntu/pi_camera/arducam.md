@@ -53,6 +53,14 @@ The key problems are:
     # adding this to get the new 6.2.x kernel from lunar
     deb http://ports.ubuntu.com/ubuntu-ports lunar main restricted
     deb http://ports.ubuntu.com/ubuntu-ports lunar-updates main restricted
+    deb http://ports.ubuntu.com/ubuntu-ports lunar universe
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-updates universe
+    deb http://ports.ubuntu.com/ubuntu-ports lunar multiverse
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-updates multiverse
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-backports main restricted universe multiverse
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-security main restricted
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-security universe
+    deb http://ports.ubuntu.com/ubuntu-ports lunar-security multiverse
     ```
 
     Then execute the following commands:
@@ -69,54 +77,48 @@ The key problems are:
     Linux ball-desktop 6.2.0-1017-raspi #19-Ubuntu SMP PREEMPT Mon Nov 13 15:35:19 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
     ```
 
+    Finally, comment out the newly added lines in the file `/etc/apt/sources.list` and then do `sudo apt update` to refresh the index.  This allows us to update and install code from 22.04LTS but still use a much later kernel.
+
 10. Clone this repo and install the `libcamera` and related code:
 
-   ```bash
-   cd ~/git
-   git clone https://github.com/RealRobotics/rpi-kb.git
-   cd rpi-kb/ubuntu/pi_camera
-   ./install_arducam.bash
-   ```
+    ```bash
+    cd ~/git
+    git clone https://github.com/RealRobotics/rpi-kb.git
+    cd rpi-kb/ubuntu/pi_camera
+    ./install_arducam.bash
+    ```
 
-## ArduCam notes
+11. Now we need to tell the system to use the correct overlay for the camera.  Open the config  file using
 
-From <https://docs.arducam.com/Raspberry-Pi-Camera/Native-camera/12MP-IMX708/>
+    ```text
+    sudo nano /boot/firmware/config.txt
+    ```
 
-Notes
+    Find the line:
 
-Please make sure you are running the latest version of Raspberry Pi OS. (January 28th，2022 or later releases, Debian version:11(Bullseye)). You need to update the config file and use libcamera apps.
-The official IMX708 Camera Module 3 can be used on Raspberry Pi directly(B0306, B0307). Rest of the IMX708 Camera Module will need some modification on configuration, please refer to the following content:
+    ```text
+    camera_auto_detect=1
+    ```
 
-For Raspberry Bullseye users running on Pi 4, please do the following:
+    and change it to:
 
-```bash
-sudo nano /boot/config.txt
-#Find the line: camera_auto_detect=1, update it to:
-camera_auto_detect=0
-dtoverlay=imx708
-#Save and reboot.
-```
+    ```text
+    camera_auto_detect=0
+    dtoverlay=imx708
+    ```
 
-For Bullseye users running on Pi 0 ~ 3, please also:
+    Save and reboot.
 
-```text
-Open a terminal
-Run sudo raspi-config
-Navigate to Advanced Options
-Enable Glamor graphic acceleration
-Reboot your Pi
-```
+12. Finally, test the camera using one fo the following options:
 
-If you encounter the display issues, please also execute the following steps:
+    ```bash
+    # Display list of cameras.
+    cam --list
+    # Show 5 seconds of video on screen
+    rpicam-hello
+    ```
 
-```text
-Open a terminal
-Run sudo raspi-config
-Navigate to Advanced Options
-Navigate to GL Driver
-Select GL (Full KMS)
-Reboot your Pi
-```
+   If these two work, then you have successfully set up your Raspberry Pi.  Time for a nice cup of tea!
 
 ## References
 
