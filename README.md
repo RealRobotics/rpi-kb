@@ -2,6 +2,15 @@
 
 This repo contains information on how to set up Raspberry Pis for work with robotics and measurement platforms at the University of Leeds.
 
+- [Real Robotics Raspberry Pi knowledge base](#real-robotics-raspberry-pi-knowledge-base)
+  - [SD card images](#sd-card-images)
+    - [Back up and restore an image](#back-up-and-restore-an-image)
+    - [Customising Ubuntu 22.04LTS for the Raspberry Pi](#customising-ubuntu-2204lts-for-the-raspberry-pi)
+  - [Connect to Eduroam](#connect-to-eduroam)
+  - [Libcamera on Ubuntu 22.04LTS](#libcamera-on-ubuntu-2204lts)
+  - [Networking](#networking)
+  - [Acknowledgments](#acknowledgments)
+
 ## SD card images
 
 Raspberry Pi provides a nice imager tool to download and create an SD card image for the operating system (OS) along with great instructions, so use them! [See here for details.](https://www.raspberrypi.com/software/)
@@ -20,9 +29,9 @@ Once you have prepared an SD card, it is useful to be able to create a back up c
 
 There are some useful tricks and tips for setting up Ubuntu for robotics use [here](ubuntu/README.md).  There are also some notes on using `libcamera` on the Raspberry Pi (22.04LTS does not have this working so you have to do a fair bit manually).
 
-## Eduroam
+## Connect to Eduroam
 
-At home, it is natural to connect a Raspberry Pi to the internet using your home Wi-Fi.  Eduroam is the Wi-Fi network for the university so it is natural for Raspberry Pis to be connected to Eduroam at some point.
+At home, it is easy to connect a Raspberry Pi to the internet using your home Wi-Fi.  Eduroam is the Wi-Fi network for the university so it is common for Raspberry Pis to be connected to Eduroam at some point.
 
 __However, due to the often lax security on Raspberry Pis caused by poor passwords etc., it is recommended that the Raspberry Pis are only connected to Eduroam during updates etc. and are disconnected afterwards.__
 
@@ -32,6 +41,12 @@ The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
 ROS Humble and Iron both use Ubuntu 22.04LTS as their OS.  Unfortunately, the RPi camera v3 needs a later version of the Debian OS and kernel.  This makes things messy!
 To install `libcamera` and the necessary tools, please see this [README](ubuntu/README.md).
+
+## Networking
+
+This section is not Raspberry Pi specific but might help someone to use a robot using a Raspberry Pi in difficult circumstances.
+
+* [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
 
 ## Acknowledgments
 
