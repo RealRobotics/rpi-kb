@@ -10,11 +10,12 @@ The basic process is:
 
 The minimal commands are detailed below.
 
-## Install PiShrink
+## Install PiShrink and pigz
 
-This is necessary as `pishrink` is run as root.
+The tool `pishrink.sh` shrinks the image and uses `pigz`.  Install them follows:
 
 ```bash
+sudo apt install pigz
 wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 chmod +x pishrink.sh
 sudo mv pishrink.sh /usr/local/bin
