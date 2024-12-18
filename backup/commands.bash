@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Create image file on local hard drive.
-# Check that mmcblk0 is used for the SD card.
-sudo dd if=/dev/mmcblk0 of=/tmp/myimg.img bs=16M status=progress
+# Create image file on local hard drive from the SD card on mmcblk0.
+sudo dd if=/dev/mmcblk0 of=./myimg.img bs=16M status=progress
 
-# Shirnk the image.
-sudo pishrink.sh -vrza /tmp/myimg.img
+# Shrink the image.
+sudo pishrink.sh -vrza ./myimg.img

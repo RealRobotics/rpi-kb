@@ -23,7 +23,7 @@ sudo mv pishrink.sh /usr/local/bin
 ## Backup
 
 Run the script [commands.bash](commands.bash).  The image is created and
-shrunk in place and resultant file can be found here  `/tmp/myimg.img.gz`.
+shrunk in place and resultant file can be found here  `./myimg.img.gz`.
 
 Move the file to a safe place.  Note `sudo` is needed to move the file as
 it was created using `sudo`.  Change the name to something more meaningful
