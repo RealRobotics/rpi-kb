@@ -5,7 +5,7 @@ This repo contains information on how to set up Raspberry Pis for work with robo
 - [Real Robotics Raspberry Pi knowledge base](#real-robotics-raspberry-pi-knowledge-base)
   - [SD card images](#sd-card-images)
     - [Back up and restore an image](#back-up-and-restore-an-image)
-    - [Customising Ubuntu 22.04LTS for the Raspberry Pi](#customising-ubuntu-2204lts-for-the-raspberry-pi)
+    - [Using Ubuntu on the Raspberry Pi](#using-ubuntu-on-the-raspberry-pi)
   - [Connect to Eduroam](#connect-to-eduroam)
   - [Libcamera on Ubuntu 22.04LTS](#libcamera-on-ubuntu-2204lts)
   - [Networking](#networking)
@@ -25,9 +25,10 @@ The micro SD card should be as fast as possible and 16GB or larger.  My personal
 
 Once you have prepared an SD card, it is useful to be able to create a back up copy and restore the copy when needed.  This process is documented [here](backup/backup.md).
 
-### Customising Ubuntu 22.04LTS for the Raspberry Pi
+### Using Ubuntu on the Raspberry Pi
 
-There are some useful tricks and tips for setting up Ubuntu for robotics use [here](ubuntu/README.md).  There are also some notes on using `libcamera` on the Raspberry Pi (22.04LTS does not have this working so you have to do a fair bit manually).
+* [Useful tips for setting up Ubuntu](ubuntu/README.md).
+* [Get the camera working on a Pi5 running Ubuntu 24.04LTS](ubuntu/pi5_camera.md).
 
 ## Connect to Eduroam
 

@@ -7,6 +7,10 @@ ROS Humble tested on these releases:
 * Ubuntu Desktop 22.04.1 LTS 64 bit.
 * Ubuntu Server 22.04.1 LTS 64 bit.
 
+ROS Jazzy tested on this release:
+
+* Ubuntu Desktop 24.04.2 LTS 64 bit.
+
 ## Installation
 
 The Raspberry Pi imager tool is the best choice for installing images onto an SD card.  Just make sure you chose the correct version of the OS.
@@ -37,7 +41,17 @@ APT::Periodic::Unattended-Upgrade "0";
 
 Save and exit and reboot.
 
-## Raspberry Pi Camera v2
+## Raspberry Pi 5 and Ubuntu 24.04LTS
+
+There is a bug that prevents useful things like `terminal` starting.  The hacky fix is to remove a package as follows:
+
+```bash
+sudo apt purge xdg-desktop-portal-gnome
+```
+
+NOTE: If you can't get a terminal up at all in the GUI, you can use `Ctrl`+`Alt`+`F3` to open a terminal only shell and run the command from there.
+
+## Raspberry Pi Camera v2 on Ubuntu 22.04LTS
 
 The setup of the Raspberry Pi Camera Module for Ubuntu 22.04LTS is a bit of a pain as the transition to using `libcamera` had not been fully implemented in this Ubuntu release.  I spent many, many hours trying different ways to make this work and in the end it was quite simple once you realise that you have to build and install the Raspberry Pi specific `libcamera` code.  To build and install the Raspberry Pi `libcamera` libraries and apps, run [this script](install_libcamera.bash).
 
