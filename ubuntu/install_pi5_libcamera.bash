@@ -35,7 +35,7 @@ then
     cd ~/git/libcamera
     meson setup build --buildtype=release -Dpipelines=rpi/vc4 \
         -Dipas=rpi/vc4 -Dv4l2=enabled -Dgstreamer=disabled \
-        -Dtest=disabled -Dlc-compliance=disabled -Dcam=enabled \
+        -Dtest=false -Dlc-compliance=disabled -Dcam=enabled \
         -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled
     ninja -C build
     sudo ninja -C build install
