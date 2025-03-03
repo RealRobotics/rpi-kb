@@ -28,8 +28,8 @@ then
     git clone https://git.libcamera.org/libcamera/libcamera.git
     cd libcamera
     # Build and install.
-    meson setup build --buildtype=release -Dpipelines=rpi/vc4,rpi/pisp \
-        -Dipas=rpi/vc4,rpi/pisp -Dv4l2=true -Dgstreamer=disabled \
+    meson setup build --buildtype=release -Dpipelines=rpi/vc4 \
+        -Dipas=rpi/vc4 -Dv4l2=true -Dgstreamer=disabled \
         -Dtest=false -Dlc-compliance=disabled -Dcam=enabled \
         -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled
     ninja -C build
