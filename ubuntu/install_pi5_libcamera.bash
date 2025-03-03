@@ -20,14 +20,19 @@ sudo apt install -y --no-install-recommends \
     meson cmake \
     python3-yaml python3-ply
 
-# libcamera
-if [ ! -e /usr/local/bin/cam ]
+# Get libcamera code.
+if [ ! -e ~/git/libcamera ]
 then
     # Get the code.
     cd ~/git
     git clone https://git.libcamera.org/libcamera/libcamera.git
-    cd libcamera
+fi
+
+# libcamera
+if [ ! -e /usr/local/bin/cam ]
+then
     # Build and install.
+    cd ~/git/libcamera
     meson setup build --buildtype=release -Dpipelines=rpi/vc4 \
         -Dipas=rpi/vc4 -Dv4l2=true -Dgstreamer=disabled \
         -Dtest=false -Dlc-compliance=disabled -Dcam=enabled \
