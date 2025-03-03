@@ -9,7 +9,7 @@ echo
 echo "Running $0..."
 echo
 
-Echo "Installing build tools..."
+echo "Installing build tools..."
 # From https://askubuntu.com/questions/1529421/camera-setting-up-on-ubuntu-24-for-raspberry-pi-5
 sudo apt update
 sudo apt install -y --no-install-recommends \
