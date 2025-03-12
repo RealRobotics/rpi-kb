@@ -18,7 +18,7 @@ sudo apt install -y --no-install-recommends \
     libgnutls28-dev openssl libtiff-dev pybind11-dev \
     qtbase5-dev libqt5core5a libqt5widgets5t64 \
     libevent-dev liblttng-ust-dev libyuv-dev libdw-dev libunwind-dev \
-    libudev libyaml-dev \
+    libudev-dev libyaml-dev \
     python3-yaml python3-ply
 
 # Get libcamera code.
