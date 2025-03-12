@@ -13,11 +13,12 @@ echo "Installing build tools..."
 # From https://askubuntu.com/questions/1529421/camera-setting-up-on-ubuntu-24-for-raspberry-pi-5
 sudo apt update
 sudo apt install -y --no-install-recommends \
-    build-essential \
+    g++ meson cmake ninja-build pkg-config \
     libboost-dev \
     libgnutls28-dev openssl libtiff-dev pybind11-dev \
     qtbase5-dev libqt5core5a libqt5widgets5t64 \
-    meson cmake \
+    libevent-dev liblttng-ust-dev libyuv-dev libdw-dev libunwind-dev \
+    libudev libyaml-dev \
     python3-yaml python3-ply
 
 # Get libcamera code.
@@ -34,7 +35,7 @@ then
     # Build and install.
     cd ~/git/libcamera
     meson setup build --buildtype=release -Dpipelines=rpi/vc4 \
-        -Dipas=rpi/vc4 -Dv4l2=enabled -Dgstreamer=disabled \
+        -Dipas=rpi/vc4 -Dv4l2=enabled -Dgstreamer=enabled \
         -Dtest=false -Dlc-compliance=disabled -Dcam=enabled \
         -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled
     ninja -C build
