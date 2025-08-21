@@ -8,6 +8,7 @@ This repo contains information on how to set up Raspberry Pis for work with robo
     - [Customising Ubuntu 22.04LTS for the Raspberry Pi](#customising-ubuntu-2204lts-for-the-raspberry-pi)
   - [Connect to Eduroam](#connect-to-eduroam)
   - [Libcamera on Ubuntu 22.04LTS](#libcamera-on-ubuntu-2204lts)
+  - [Docker with Ubuntu 24.04LTS and ROS Jazzy](#docker-with-ubuntu-2404lts-and-ros-jazzy)
   - [Networking](#networking)
   - [Acknowledgments](#acknowledgments)
 
@@ -41,6 +42,10 @@ The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
 ROS Humble and Iron both use Ubuntu 22.04LTS as their OS.  Unfortunately, the RPi camera v3 needs a later version of the Debian OS and kernel.  This makes things messy!
 To install `libcamera` and the necessary tools, please see this [README](ubuntu/README.md).
+
+## Docker with Ubuntu 24.04LTS and ROS Jazzy
+
+For the latest ROS 2 Jazzy release, you can run Ubuntu 24.04LTS in a Docker container on your Raspberry Pi 5. This provides an isolated environment with full camera access and the latest ROS 2 features. See the [Docker setup guide](ubuntu/docker_ros_jazzy/README.md) for complete instructions and automated scripts.
 
 ## Networking
 

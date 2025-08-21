@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  ros-jazzy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERNAME: ${USER}
+        USER_UID: ${UID:-1000}
+        USER_GID: ${GID:-1000}
+    image: rpi-ros-jazzy:latest
+    container_name: ros-jazzy-container
+    hostname: ros-jazzy-pi
+    privileged: true
+    network_mode: host
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.docker.xauth
+      - ROS_DOMAIN_ID=0
+    volumes:
+      # X11 forwarding
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      # Persistent workspace
+      - ${HOME}/ros2_ws:/home/${USER}/ros2_ws:rw
+      - ${HOME}/docker_data:/home/${USER}/data:rw
+      # Shared memory for large messages
+      - /dev/shm:/dev/shm:rw
+    devices:
+      # Camera devices
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+      # Raspberry Pi specific devices (if available)
+      - /dev/vchiq:/dev/vchiq
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vcsm-cma:/dev/vcsm-cma
+    group_add:
+      - video
+      - audio
+    restart: unless-stopped
+    command: /bin/bash -l
+    
+  # Optional: ROS 2 bag recorder service
+  bag-recorder:
+    image: rpi-ros-jazzy:latest
+    container_name: ros-bag-recorder
+    network_mode: host
+    environment:
+      - ROS_DOMAIN_ID=0
+    volumes:
+      - ${HOME}/ros2_bags:/home/${USER}/bags:rw
+    depends_on:
+      - ros-jazzy
+    profiles:
+      - recording
+    command: >
+      bash -c "
+        source /opt/ros/jazzy/setup.bash &&
+        ros2 bag record -a -o /home/${USER}/bags/recording_$(date +%Y%m%d_%H%M%S)
+      "
+    
+  # Optional: RViz visualization service
+  rviz:
+    image: rpi-ros-jazzy:latest
+    container_name: ros-rviz
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.docker.xauth
+      - ROS_DOMAIN_ID=0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+    depends_on:
+      - ros-jazzy
+    profiles:
+      - visualization
+    command: >
+      bash -c "
+        source /opt/ros/jazzy/setup.bash &&
+        rviz2
+      "
