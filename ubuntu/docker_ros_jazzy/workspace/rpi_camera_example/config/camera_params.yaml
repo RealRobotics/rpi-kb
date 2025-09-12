@@ -1,0 +1,9 @@
+# Camera configuration for ROS Jazzy
+camera:
+  ros__parameters:
+    width: 640
+    height: 480
+    framerate: 30
+    device: "/dev/video0"
+    frame_id: "camera_frame"
+    publish_tf: true
