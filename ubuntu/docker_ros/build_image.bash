@@ -27,8 +27,6 @@ fi
 echo "Building robotics development container..."
 docker build -t rpi-robotics:latest .
 
-echo
-echo "Setting up X11 forwarding for GUI applications..."
 # Setup X11 forwarding using modular script
 if [ -f "./setup_x11.bash" ]; then
     ./setup_x11.bash
@@ -45,9 +43,6 @@ if [ -f "./test_camera.bash" ]; then
         echo "Camera test completed successfully!"
     else
         echo "Camera test failed or no camera detected."
-        echo "You can install camera support later with:"
-        echo "  ./ubuntu/pi_camera/install_libcamera.bash"
-        echo "  or ./ubuntu/pi_camera/install_arducam.bash"
     fi
 else
     echo "Warning: test_camera.bash not found. Skipping camera test."

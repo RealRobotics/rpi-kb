@@ -24,10 +24,10 @@ WORKDIR /home/ubuntu/ws
 RUN chown -R ubuntu:ubuntu /home/ubuntu/
 
 # Set home directory
-ENV HOME /home/ubuntu
+ENV HOME=/home/ubuntu
 
 # Use display
-ENV DISPLAY :1.0
+ENV DISPLAY=:1.0
 
 # Change to user ubuntu.
 USER ubuntu
