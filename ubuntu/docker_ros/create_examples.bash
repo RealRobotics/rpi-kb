@@ -5,18 +5,21 @@
 # Stop on first error
 set -e
 
+docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
+. ${docker_dir}/vars.bash
+
 echo
 echo "Creating development directory structure..."
 # Create development directories
 mkdir -p ~/git
-mkdir -p ~/robotics_workspace/src
+mkdir -p ${WORKSPACE_DIR}/src
 mkdir -p ~/data/logs
 mkdir -p ~/data/images
 mkdir -p ~/examples
 
 echo "Development directories created:"
 echo "  ~/git - for cloning repositories"
-echo "  ~/robotics_workspace - ROS workspace"
+echo "  ${WORKSPACE_DIR} - ROS workspace"
 echo "  ~/data - for data storage"
 echo "  ~/examples - example files"
 
@@ -24,8 +27,8 @@ echo
 echo "Creating example configuration files..."
 
 # Create example ROS workspace structure
-mkdir -p ~/robotics_workspace/src/examples/launch
-cat << 'EOF' > ~/robotics_workspace/src/examples/launch/example.launch.py
+mkdir -p ${WORKSPACE_DIR}/src/examples/launch
+cat << 'EOF' > ${WORKSPACE_DIR}/src/examples/launch/example.launch.py
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
@@ -45,7 +48,7 @@ def generate_launch_description():
 EOF
 
 # Create example package.xml
-cat << 'EOF' > ~/robotics_workspace/src/examples/package.xml
+cat << 'EOF' > ${WORKSPACE_DIR}/src/examples/package.xml
 <?xml version="1.0"?>
 <package format="3">
   <name>examples</name>
@@ -78,7 +81,7 @@ This directory contains examples and documentation for your robotics development
 2. **Run GUI container**: `./run_gui_container.bash` (if X11 is setup)
 3. **Build ROS workspace**:
    ```bash
-   cd ~/robotics_workspace
+   cd ${WORKSPACE_DIR}
    colcon build
    source install/setup.bash
    ```
@@ -87,7 +90,7 @@ This directory contains examples and documentation for your robotics development
 ## Directory Structure
 
 - `~/git/` - Clone repositories here
-- `~/robotics_workspace/` - ROS 2 workspace
+- `${WORKSPACE_DIR}/` - ROS 2 workspace
 - `~/data/` - Data storage (logs, images)
 - `~/examples/` - Example configurations
 
@@ -118,6 +121,6 @@ echo "1. Source your updated shell: source ~/.bashrc"
 echo "2. Test Docker: docker run hello-world"
 echo "3. Test GUI container: ./start.bash then ./attach.bash"
 echo "4. Explore the examples in ~/examples/README.md"
-echo "5. Start your robotics projects in ~/robotics_workspace/"
+echo "5. Start your robotics projects in ${WORKSPACE_DIR}/"
 echo
 echo
