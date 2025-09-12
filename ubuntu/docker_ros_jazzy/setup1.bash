@@ -11,7 +11,7 @@ echo "Raspberry Pi Setup - Part 1"
 echo "=========================================="
 echo "This script will install Docker and configure user groups."
 echo "After completion, you must log out and log back in before"
-echo "running setup_part2.bash to complete the setup."
+echo "running setup2.bash to complete the setup."
 echo
 
 # Update system first
@@ -46,7 +46,7 @@ echo "IMPORTANT: You must now LOG OUT and LOG BACK IN"
 echo "for the group changes to take effect."
 echo
 echo "After logging back in, complete the setup by running:"
-echo "  ./setup_part2.bash"
+echo "  ./setup2.bash"
 echo
 echo "This will:"
 echo "- Build the development container"
@@ -56,5 +56,5 @@ echo "- Create development directories and example files"
 echo
 echo "Press Enter to acknowledge and prepare to logout..."
 read
-echo "Please logout and login, then run: ./setup_part2.bash"
+echo "Please logout and login, then run: ./setup2.bash"
 echo

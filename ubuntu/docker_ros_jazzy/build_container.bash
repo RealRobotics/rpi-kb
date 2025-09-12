@@ -20,7 +20,7 @@ fi
 if [ ! -f "Dockerfile" ]; then
     echo "Creating Dockerfile for ROS development..."
     cat << 'EOF' > Dockerfile
-FROM ros:humble-desktop
+FROM osrf/ros:jazzy-desktop
 
 # Install additional packages
 RUN apt-get update && apt-get install -y \
@@ -38,12 +38,12 @@ RUN apt-get update && apt-get install -y \
 RUN rosdep update
 
 # Create workspace
-RUN mkdir -p /ros_ws/src
-WORKDIR /ros_ws
+RUN mkdir -p /ws/src
+WORKDIR /ws
 
 # Setup environment
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
-RUN echo "source /ros_ws/install/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+RUN echo "source /ws/install/setup.bash" >> ~/.bashrc
 
 CMD ["/bin/bash"]
 EOF

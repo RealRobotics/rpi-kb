@@ -27,7 +27,6 @@ echo
 echo "Building development container..."
 # Build Docker container using modular script
 if [ -f "./build_container.bash" ]; then
-    chmod +x ./build_container.bash
     ./build_container.bash
 else
     echo "Warning: build_container.bash not found. Skipping container build."
@@ -37,7 +36,6 @@ echo
 echo "Setting up X11 forwarding for GUI applications..."
 # Setup X11 forwarding using modular script
 if [ -f "./setup_x11.bash" ]; then
-    chmod +x ./setup_x11.bash
     ./setup_x11.bash
 else
     echo "Warning: setup_x11.bash not found. Skipping X11 setup."
@@ -109,13 +107,13 @@ cat << 'EOF' > ~/robotics_workspace/src/examples/package.xml
   <description>Example ROS 2 package</description>
   <maintainer email="user@example.com">Your Name</maintainer>
   <license>MIT</license>
-  
+
   <exec_depend>demo_nodes_cpp</exec_depend>
   <exec_depend>demo_nodes_py</exec_depend>
-  
+
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-  
+
   <export>
     <build_type>ament_python</build_type>
   </export>
@@ -152,7 +150,7 @@ This directory contains examples and documentation for your robotics development
 
 1. **Test Docker**: `docker run hello-world`
 2. **Run GUI container**: `./run_gui_container.bash` (if X11 is setup)
-3. **Build ROS workspace**: 
+3. **Build ROS workspace**:
    ```bash
    cd ~/robotics_workspace
    colcon build
@@ -217,7 +215,7 @@ echo "================================================="
 echo
 echo "Summary of what was configured:"
 echo "✓ Docker development container built"
-echo "✓ X11 forwarding configured for GUI applications" 
+echo "✓ X11 forwarding configured for GUI applications"
 echo "✓ Development directory structure created"
 echo "✓ Camera functionality tested (if available)"
 echo "✓ Example ROS 2 workspace and files created"
