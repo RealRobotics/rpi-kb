@@ -6,11 +6,10 @@ services:
     image: rpi-robotics:latest
     container_name: rpi-robotics-dev
     volumes:
-      - ./robotics_workspace:/ros_ws
+      - ./robotics_workspace:/home/ubuntu/ws
       - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
     privileged: true
     network_mode: host
     environment:
       - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw

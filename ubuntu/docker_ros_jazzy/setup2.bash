@@ -120,26 +120,6 @@ cat << 'EOF' > ~/robotics_workspace/src/examples/package.xml
 </package>
 EOF
 
-# Create a sample Docker compose file for multi-container setups
-cat << 'EOF' > docker-compose.yml
-version: '3.8'
-
-services:
-  robotics:
-    build: .
-    image: rpi-robotics:latest
-    container_name: rpi-robotics-dev
-    volumes:
-      - ./robotics_workspace:/ros_ws
-      - /dev:/dev
-    privileged: true
-    network_mode: host
-    environment:
-      - DISPLAY=${DISPLAY}
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:rw
-EOF
-
 # Create basic README for the user
 cat << 'EOF' > ~/examples/README.md
 # Raspberry Pi Robotics Setup
@@ -174,39 +154,13 @@ This directory contains examples and documentation for your robotics development
 
 ## Next Steps
 
-1. Install ROS 2 packages: `sudo apt install ros-humble-desktop`
+1. Install ROS 2 packages: `sudo apt install ros-jazzy-desktop`
 2. Set up your SSH keys for git repositories
 3. Clone your robotics projects to `~/git/`
 4. Configure your development IDE/editor
 
 Happy coding!
 EOF
-
-echo
-echo "Setting up shell environment..."
-# Add helpful aliases to .bashrc if they don't already exist
-if ! grep -q "# Robotics development aliases" ~/.bashrc; then
-    cat << 'EOF' >> ~/.bashrc
-
-# Robotics development aliases
-alias drun='docker run -it --rm --privileged --net=host -v $(pwd):/workspace -w /workspace'
-alias dcup='docker-compose up -d'
-alias dcdown='docker-compose down'
-alias rosws='cd ~/robotics_workspace'
-alias gitdir='cd ~/git'
-
-# ROS environment (if running outside container)
-if [ -f "/opt/ros/humble/setup.bash" ]; then
-    source /opt/ros/humble/setup.bash
-fi
-if [ -f "$HOME/robotics_workspace/install/setup.bash" ]; then
-    source $HOME/robotics_workspace/install/setup.bash
-fi
-EOF
-    echo "Shell aliases added to ~/.bashrc"
-else
-    echo "Shell aliases already present in ~/.bashrc"
-fi
 
 echo
 echo "================================================="
@@ -220,7 +174,6 @@ echo "✓ Development directory structure created"
 echo "✓ Camera functionality tested (if available)"
 echo "✓ Example ROS 2 workspace and files created"
 echo "✓ Docker Compose configuration created"
-echo "✓ Shell aliases and environment configured"
 echo
 echo "Your Raspberry Pi is now ready for robotics development!"
 echo
