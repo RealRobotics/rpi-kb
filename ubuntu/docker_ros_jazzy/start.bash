@@ -5,10 +5,6 @@
 docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
 . ${docker_dir}/vars.bash
 
-mkdir -p ${WORKSPACE_DIR}
-cp -f ${docker_dir}/../setup/*.bash ${WORKSPACE_DIR}
-cp -f ${docker_dir}/../vars.bash ${WORKSPACE_DIR}
-
 docker container inspect ${CONTAINER_NAME} &> /dev/null
 if [ $? == 0 ]
 then
@@ -25,19 +21,6 @@ then
 else
     # Container does not exist.
     mkdir -p ${WORKSPACE_DIR}
-    # Setup X window for the container to use.
-    XAUTH=/tmp/.docker.xauth
-    if [ ! -f $XAUTH ]
-    then
-        xauth_list=$(xauth nlist :0 | sed -e 's/^..../ffff/')
-        if [ ! -z "$xauth_list" ]
-        then
-            echo $xauth_list | xauth -f $XAUTH nmerge -
-        else
-            touch $XAUTH
-        fi
-        chmod a+r $XAUTH
-    fi
 
     docker container run \
         --detach \
@@ -46,11 +29,7 @@ else
         --name ${CONTAINER_NAME} \
         --volume ${WORKSPACE_DIR}:/home/ubuntu/ws \
         --env="DISPLAY=$DISPLAY" \
-        --env="QT_X11_NO_MITSHM=1" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-        --env="XAUTHORITY=$XAUTH" \
-        --volume="$XAUTH:$XAUTH" \
-        --gpus all \
         ${IMAGE_NAME}:${IMAGE_TAG} &> /dev/null
     if [ $? == 0 ]
     then
