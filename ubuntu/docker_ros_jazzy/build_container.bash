@@ -18,35 +18,8 @@ fi
 
 # Create a simple Dockerfile for ROS development if it doesn't exist
 if [ ! -f "Dockerfile" ]; then
-    echo "Creating Dockerfile for ROS development..."
-    cat << 'EOF' > Dockerfile
-FROM ros:jazzy-perception
-
-# Install additional packages
-RUN apt-get update && apt-get install -y \
-    python3-pip \
-    python3-colcon-common-extensions \
-    python3-rosdep \
-    python3-vcstool \
-    nano \
-    git \
-    wget \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Initialize rosdep
-RUN rosdep update
-
-# Create workspace
-RUN mkdir -p /ws/src
-WORKDIR /ws
-
-# Setup environment
-RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
-RUN echo "source /ws/install/setup.bash" >> ~/.bashrc
-
-CMD ["/bin/bash"]
-EOF
+    echo "Error: Dockerfile not found!"
+    exit 1
 fi
 
 # Build the container
