@@ -3,6 +3,7 @@
 This repo contains information on how to set up Raspberry Pis for work with robotics and measurement platforms at the University of Leeds.
 
 - [Real Robotics Raspberry Pi knowledge base](#real-robotics-raspberry-pi-knowledge-base)
+  - [Quick Setup](#quick-setup)
   - [SD card images](#sd-card-images)
     - [Back up and restore an image](#back-up-and-restore-an-image)
     - [Customising Ubuntu 22.04LTS for the Raspberry Pi](#customising-ubuntu-2204lts-for-the-raspberry-pi)
@@ -10,6 +11,32 @@ This repo contains information on how to set up Raspberry Pis for work with robo
   - [Libcamera on Ubuntu 22.04LTS](#libcamera-on-ubuntu-2204lts)
   - [Networking](#networking)
   - [Acknowledgments](#acknowledgments)
+
+## Quick Setup
+
+For a complete robotics development environment setup on your Raspberry Pi, use the automated setup scripts:
+
+1. **Run Part 1** (installs Docker and configures user groups):
+   ```bash
+   ./setup_part1.bash
+   ```
+
+2. **Log out and log back in** (required for group changes to take effect)
+
+3. **Run Part 2** (builds containers, sets up development environment):
+   ```bash
+   ./setup_part2.bash
+   ```
+
+This two-part setup ensures proper configuration of Docker permissions and provides a complete development environment with:
+- Docker and containerization support
+- ROS 2 development container
+- X11 forwarding for GUI applications
+- Camera support and testing
+- Development directory structure
+- Example configurations and launch files
+
+For manual setup or specific components, see the individual sections below.
 
 ## SD card images
 

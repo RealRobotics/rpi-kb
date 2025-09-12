@@ -22,7 +22,9 @@ The Ubuntu setup runs for a while and then you do some more configuration screen
 
 ### Disable unattended upgrades
 
-Unattended or automatic upgrades are great for always on IOT devices that are connected to the Internet so need to be patched regularly.  However, our robots are normally isolated from the internet so automatic upgrades just cause lots of inconvenience.
+**Note**: For a complete automated setup, use the main setup scripts in the repository root: `./setup_part1.bash` followed by `./setup_part2.bash` after logging out and back in.
+
+For manual configuration, unattended or automatic upgrades are great for always on IOT devices that are connected to the Internet so need to be patched regularly.  However, our robots are normally isolated from the internet so automatic upgrades just cause lots of inconvenience.
 
 ```bash
 sudo nano /etc/apt/apt.conf.d/20auto-upgrades
