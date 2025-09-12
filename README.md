@@ -37,9 +37,9 @@ __However, due to the often lax security on Raspberry Pis caused by poor passwor
 
 The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
-## Libcamera on Ubuntu 22.04LTS
+## Libcamera on Ubuntu 24.04LTS
 
-ROS Humble and Iron both use Ubuntu 22.04LTS as their OS.  Unfortunately, the RPi camera v3 needs a later version of the Debian OS and kernel.  This makes things messy!
+ROS Jazzy uses Ubuntu 24.04LTS as its OS, while ROS Humble and Iron use Ubuntu 22.04LTS. The RPi camera v3 works better with the newer Ubuntu versions and kernel.
 To install `libcamera` and the necessary tools, please see this [README](ubuntu/README.md).
 
 ## Networking

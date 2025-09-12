@@ -1,12 +1,12 @@
 # Configuration for ArduCam
 
-The goal is to use the ArduCam B0310 12MP IMX708 camera with ROS Humble on a Raspberry Pi 4.  These instructions also work for the Raspberry Pi camera v3 as it uses the same kernel module and drivers.
+The goal is to use the ArduCam B0310 12MP IMX708 camera with ROS Jazzy on a Raspberry Pi 4. These instructions also work for the Raspberry Pi camera v3 as it uses the same kernel module and drivers.
 
-The key problems are:
+With ROS Jazzy and Ubuntu 24.04LTS, camera support is much improved compared to ROS Humble. However, for legacy ROS Humble setups, the key problems were:
 
 1. The kernel module needed by the ArduCam camera is only available on Linux kernels 6.1 and later.
 2. ROS2 Humble (and Iron) only run on Ubuntu 22.04LTS and that uses the Linux kernel 5.15.
-3. Ubuntu 22.04LTS does nto have the latest `libcamera` tools or the Raspberry Pi camera utilities `rpicam-hello` etc.
+3. Ubuntu 22.04LTS does not have the latest `libcamera` tools or the Raspberry Pi camera utilities `rpicam-hello` etc.
 
 ## Process
 
