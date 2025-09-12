@@ -6,42 +6,6 @@
 set -e
 
 echo
-echo "=========================================="
-echo "Raspberry Pi Setup - Part 2"
-echo "=========================================="
-echo "This script completes the setup after you have logged out and back in."
-echo "It will build containers, setup development environment, and test functionality."
-echo
-
-# Verify Docker access (user should now be in docker group)
-echo "Verifying Docker access..."
-if ! docker info &>/dev/null; then
-    echo "Error: Cannot access Docker daemon."
-    echo "Please make sure you logged out and logged back in after running setup_part1.bash"
-    echo "You can check if you're in the docker group with: groups \$USER"
-    exit 1
-fi
-echo "Docker access confirmed!"
-
-echo
-echo "Building development container..."
-# Build Docker container using modular script
-if [ -f "./build_container.bash" ]; then
-    ./build_container.bash
-else
-    echo "Warning: build_container.bash not found. Skipping container build."
-fi
-
-echo
-echo "Setting up X11 forwarding for GUI applications..."
-# Setup X11 forwarding using modular script
-if [ -f "./setup_x11.bash" ]; then
-    ./setup_x11.bash
-else
-    echo "Warning: setup_x11.bash not found. Skipping X11 setup."
-fi
-
-echo
 echo "Creating development directory structure..."
 # Create development directories
 mkdir -p ~/git
@@ -55,24 +19,6 @@ echo "  ~/git - for cloning repositories"
 echo "  ~/robotics_workspace - ROS workspace"
 echo "  ~/data - for data storage"
 echo "  ~/examples - example files"
-
-echo
-echo "Testing camera functionality..."
-# Test camera using modular script
-if [ -f "./test_camera.bash" ]; then
-    chmod +x ./test_camera.bash
-    if ./test_camera.bash; then
-        echo "Camera test completed successfully!"
-    else
-        echo "Camera test failed or no camera detected."
-        echo "You can install camera support later with:"
-        echo "  ./ubuntu/pi_camera/install_libcamera.bash"
-        echo "  or ./ubuntu/pi_camera/install_arducam.bash"
-    fi
-else
-    echo "Warning: test_camera.bash not found. Skipping camera test."
-    echo "Camera support scripts are available in ./ubuntu/pi_camera/"
-fi
 
 echo
 echo "Creating example configuration files..."
@@ -154,7 +100,7 @@ This directory contains examples and documentation for your robotics development
 
 ## Next Steps
 
-1. Install ROS 2 packages: `sudo apt install ros-jazzy-desktop`
+1. Install ROS 2 packages as needed.
 2. Set up your SSH keys for git repositories
 3. Clone your robotics projects to `~/git/`
 4. Configure your development IDE/editor
@@ -167,26 +113,11 @@ echo "================================================="
 echo "SETUP COMPLETED SUCCESSFULLY!"
 echo "================================================="
 echo
-echo "Summary of what was configured:"
-echo "✓ Docker development container built"
-echo "✓ X11 forwarding configured for GUI applications"
-echo "✓ Development directory structure created"
-echo "✓ Camera functionality tested (if available)"
-echo "✓ Example ROS 2 workspace and files created"
-echo "✓ Docker Compose configuration created"
-echo
-echo "Your Raspberry Pi is now ready for robotics development!"
-echo
 echo "Next steps:"
 echo "1. Source your updated shell: source ~/.bashrc"
 echo "2. Test Docker: docker run hello-world"
-echo "3. Test GUI container: ./run_gui_container.bash"
+echo "3. Test GUI container: ./start.bash then ./attach.bash"
 echo "4. Explore the examples in ~/examples/README.md"
-echo "5. Start your robotics projects in ~/ws/"
+echo "5. Start your robotics projects in ~/robotics_workspace/"
 echo
-echo "Need camera support? Run one of these:"
-echo "  ./ubuntu/pi_camera/install_libcamera.bash"
-echo "  ./ubuntu/pi_camera/install_arducam.bash"
-echo
-echo "Happy robotics development!"
 echo

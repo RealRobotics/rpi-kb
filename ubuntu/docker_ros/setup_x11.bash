@@ -18,6 +18,4 @@ sudo apt install -y \
 
 echo
 echo "X11 setup completed!"
-echo "Use the 'run_gui_container.bash' script to run containers with GUI support."
-echo "Test with: ./run_gui_container.bash"
 echo
