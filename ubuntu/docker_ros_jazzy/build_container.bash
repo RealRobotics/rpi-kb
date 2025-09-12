@@ -20,7 +20,7 @@ fi
 if [ ! -f "Dockerfile" ]; then
     echo "Creating Dockerfile for ROS development..."
     cat << 'EOF' > Dockerfile
-FROM ros:jazzy-ros-core
+FROM ros:jazzy-perception
 
 # Install additional packages
 RUN apt-get update && apt-get install -y \
