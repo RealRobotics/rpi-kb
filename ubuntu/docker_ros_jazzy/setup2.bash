@@ -229,7 +229,7 @@ echo "1. Source your updated shell: source ~/.bashrc"
 echo "2. Test Docker: docker run hello-world"
 echo "3. Test GUI container: ./run_gui_container.bash"
 echo "4. Explore the examples in ~/examples/README.md"
-echo "5. Start your robotics projects in ~/robotics_workspace/"
+echo "5. Start your robotics projects in ~/ws/"
 echo
 echo "Need camera support? Run one of these:"
 echo "  ./ubuntu/pi_camera/install_libcamera.bash"
