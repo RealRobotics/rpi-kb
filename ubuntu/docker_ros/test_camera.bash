@@ -18,7 +18,7 @@ elif command -v libcamera-hello &> /dev/null; then
 else
     echo "Warning: No camera tools found. Install libcamera first using:"
     echo "  ./ubuntu/pi_camera/install_libcamera.bash"
-    echo "  or"  
+    echo "  or"
     echo "  ./ubuntu/pi_camera/install_arducam.bash"
     echo
     exit 1
@@ -31,15 +31,6 @@ echo "Testing camera with 5-second preview..."
 if $CAMERA_TOOL --timeout 5000; then
     echo
     echo "Camera test successful!"
-    
-    # Test image capture
-    echo "Testing image capture..."
-    if $CAMERA_TOOL --timeout 1000 --output test_image.jpg; then
-        echo "Image captured successfully as 'test_image.jpg'"
-        ls -la test_image.jpg
-    else
-        echo "Warning: Image capture failed"
-    fi
 else
     echo
     echo "Camera test failed. Please check:"
