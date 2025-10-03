@@ -31,7 +31,9 @@ ENV DISPLAY=:1.0
 
 # Change to user ubuntu.
 USER ubuntu
+# Set the password to "rr1234" for user ubuntu (for sudo access if needed).
+RUN echo "${USER}:rr1234" | chpasswd
 
 # Setup environment
-RUN echo ". /opt/ros/foxy/setup.bash" > /home/ubuntu/.bash_aliases
+RUN echo ". /opt/ros/jazzy/setup.bash" > /home/ubuntu/.bash_aliases
 RUN echo "source /home/ubuntu/ws/install/setup.bash" >> /home/ubuntu/.bash_aliases

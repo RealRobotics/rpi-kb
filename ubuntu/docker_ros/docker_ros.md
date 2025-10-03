@@ -1,6 +1,6 @@
 # ROS in a docker container on a Pi 5
 
-The scripts in this directory setup and run a Ubuntu 24.04LTS and ROS Jazzy inside a docker container on a Raspberry Pi 5.  Ubuntu 24.04LTS can be installed natively on the the Pi5 but camera support is sadly lacking.  Using a docker on the Pi5 is the simplest way of working around this problem.
+Ubuntu 24.04LTS can be installed natively on the the Pi5 but camera support is sadly lacking.  Installing Ubuntu in a docker running Raspberry Pi OS is the simplest way of working around this problem.  The scripts in this directory help you do this with minimal fuss.  Tested on "Bookworm".
 
 ## Installation and setup
 
