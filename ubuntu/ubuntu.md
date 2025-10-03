@@ -46,3 +46,7 @@ To run the camera with ROS 2, I found this repo that works well enough for what 
 ## Raspberry Pi Camera v3
 
 Running the camera v3 with ROS2 Humble or Iron makes things a lot more difficult as the kernel has to be updated.  The process has been documented [here](pi_camera/arducam.md).
+
+## Raspberry Pi 5, Ubuntu 24.04LTS and cameras
+
+Ubuntu 24.04LTS for the Raspberry Pi does not support the modifications needed to allow cameras to work.  To get around this issue, we installed Raspberry Pi OS so the cameras work and then run ROS in an Ubuntu 24.04LTS docker.  [These notes](docker_ros/docker_ros.md) and related scripts explain how to do this.
