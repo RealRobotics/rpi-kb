@@ -26,6 +26,9 @@ else
         --detach \
         --tty \
         --net=host \
+        --group-add video \
+        --device /dev/media0:/dev/media0 \
+        --device /dev/media1:/dev/media1 \
         --name ${CONTAINER_NAME} \
         --volume ${WORKSPACE_DIR}:/home/ubuntu/ws \
         --env="DISPLAY=$DISPLAY" \

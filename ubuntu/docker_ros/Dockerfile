@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
     git \
     wget \
     curl \
+    libcamera-apps \
+    v4l-utils \
+    libcamera-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep
@@ -25,6 +28,8 @@ WORKDIR /home/ubuntu/ws
 # Prepare to change to user ubuntu (already exists in base image with uid and gid = 1000).
 # Change ownership of home directory to ubuntu:ubuntu.
 RUN chown -R ubuntu:ubuntu /home/ubuntu/
+# Add ubuntu user to video group so it can access camera devices inside container
+RUN usermod -aG video ubuntu || true
 # Set home directory
 ENV HOME=/home/ubuntu
 
