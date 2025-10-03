@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
 # Initialize rosdep
 RUN rosdep update
 
+# Set the password to "rr1234" for user ubuntu (for sudo access if needed).
+RUN echo "ubuntu:rr1234" | chpasswd
+
 # Create workspace
 RUN mkdir -p /home/ubuntu/ws/src
 WORKDIR /home/ubuntu/ws
@@ -22,7 +25,6 @@ WORKDIR /home/ubuntu/ws
 # Prepare to change to user ubuntu (already exists in base image with uid and gid = 1000).
 # Change ownership of home directory to ubuntu:ubuntu.
 RUN chown -R ubuntu:ubuntu /home/ubuntu/
-
 # Set home directory
 ENV HOME=/home/ubuntu
 
@@ -31,9 +33,7 @@ ENV DISPLAY=:1.0
 
 # Change to user ubuntu.
 USER ubuntu
-# Set the password to "rr1234" for user ubuntu (for sudo access if needed).
-RUN echo "${USER}:rr1234" | chpasswd
 
-# Setup environment
+# Setup ROS environment
 RUN echo ". /opt/ros/jazzy/setup.bash" > /home/ubuntu/.bash_aliases
 RUN echo "source /home/ubuntu/ws/install/setup.bash" >> /home/ubuntu/.bash_aliases
