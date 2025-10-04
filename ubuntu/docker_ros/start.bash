@@ -37,7 +37,6 @@ else
         --device /dev/video2:/dev/video2 \
         --device /dev/video3:/dev/video3 \
         --device /dev/dri:/dev/dri \
-        --volume /dev:/dev \
         --volume /lib/firmware:/lib/firmware \
         --volume /run/udev:/run/udev:ro \
         --name ${CONTAINER_NAME} \
