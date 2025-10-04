@@ -2,7 +2,7 @@
 # Start the docker container.
 # set -x
 
-echo "Starting docker container. This takes about 5 seconds..."
+echo "Starting docker container. This can take up to 5 seconds..."
 
 docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
 . ${docker_dir}/vars.bash
@@ -28,7 +28,15 @@ else
         --detach \
         --tty \
         --net=host \
-        --devices /dev/dri:/dev/dri \
+        --device /dev/media0:/dev/media0 \
+        --device /dev/media1:/dev/media1 \
+        --device /dev/media2:/dev/media2 \
+        --device /dev/media3:/dev/media3 \
+        --device /dev/video0:/dev/video0 \
+        --device /dev/video1:/dev/video1 \
+        --device /dev/video2:/dev/video2 \
+        --device /dev/video3:/dev/video3 \
+        --device /dev/dri:/dev/dri \
         --volume /dev:/dev \
         --volume /lib/firmware:/lib/firmware \
         --volume /run/udev:/run/udev:ro \

@@ -2,14 +2,13 @@
 # Stop the docker container.
 set -e
 
-echo "Stopping docker container. This takes about 10 seconds..."
-
 docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
 . ${docker_dir}/vars.bash
 
 if [ "$( docker container inspect -f '{{.State.Status}}' ${CONTAINER_NAME} )" == "running" ]
 then
     # Container is running so stop it.
+    echo "Stopping docker container. This takes about 10 seconds..."
     docker stop ${CONTAINER_NAME} &> /dev/null
     sudo rm -rf /tmp/.docker.xauth/
     echo "Docker '${CONTAINER_NAME}' stopped."

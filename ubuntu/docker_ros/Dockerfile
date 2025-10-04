@@ -9,21 +9,19 @@ RUN apt-get update && apt-get install -y \
     nano \
     git \
     wget \
-    curl
+    curl \
+    sudo
 
 # Camera support
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libcamera-tools \
-    libcamera-dev \
-    v4l2-utils \
+    libcamera-ipa \
+    v4l-utils \
     ros-jazzy-camera-ros
 
 # Clean up to save space.
-RUN apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Initialize rosdep
-RUN rosdep update
+# RUN apt-get clean \
+#     && rm -rf /var/lib/apt/lists/*
 
 # Set the password to "rr1234" for user ubuntu (for sudo access if needed).
 RUN echo "ubuntu:rr1234" | chpasswd
@@ -49,3 +47,6 @@ USER ubuntu
 # Setup ROS environment
 RUN echo ". /opt/ros/jazzy/setup.bash" > /home/ubuntu/.bash_aliases
 RUN echo "source /home/ubuntu/ws/install/setup.bash" >> /home/ubuntu/.bash_aliases
+
+# Initialize rosdep
+RUN rosdep update
