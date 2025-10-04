@@ -9,10 +9,17 @@ RUN apt-get update && apt-get install -y \
     nano \
     git \
     wget \
-    curl \
-    libcamera-apps \
-    v4l-utils \
+    curl
+
+# Camera support
+RUN apt-get install -y \
+    libcamera-tools \
     libcamera-dev \
+    v4l2-utils \
+    ros-jazzy-camera-ros
+
+# Clean up to save space.
+RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Initialize rosdep
