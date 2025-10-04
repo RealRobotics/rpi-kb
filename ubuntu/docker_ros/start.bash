@@ -2,6 +2,8 @@
 # Start the docker container.
 # set -x
 
+echo "Starting docker container. This takes about 5 seconds..."
+
 docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
 . ${docker_dir}/vars.bash
 
@@ -27,11 +29,9 @@ else
         --tty \
         --net=host \
         --devices /dev/dri:/dev/dri \
-        # --device /dev/media0:/dev/media0 \
-        # --device /dev/media1:/dev/media1 \
-        --volumes /dev:/dev \
-        --volumes /lib/firmware:/lib/firmware \
-        --volumes /run/udev:/run/udev:ro \
+        --volume /dev:/dev \
+        --volume /lib/firmware:/lib/firmware \
+        --volume /run/udev:/run/udev:ro \
         --name ${CONTAINER_NAME} \
         --volume ${WORKSPACE_DIR}:/home/ubuntu/ws \
         --env="DISPLAY=$DISPLAY" \

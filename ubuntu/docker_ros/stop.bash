@@ -2,6 +2,8 @@
 # Stop the docker container.
 set -e
 
+echo "Stopping docker container. This takes about 10 seconds..."
+
 docker_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )"
 . ${docker_dir}/vars.bash
 
@@ -14,4 +16,3 @@ then
 else
     echo "Docker '${CONTAINER_NAME}' already stopped."
 fi
-
