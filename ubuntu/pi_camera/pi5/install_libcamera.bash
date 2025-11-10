@@ -1,5 +1,9 @@
 #!/bin/bash
-# Install and setup Raspberry Pi libcamera packages.
+#
+# Script to build and install Raspberry Pi's libcamera fork and
+# the ROS 2 camera_ros package for Ubuntu 24.04 (Jazzy) on a Raspberry Pi 5.
+# This is necessary because the standard Ubuntu libcamera does not support
+# the custom CSI camera modules on the RPi 5.
 
 # Stop on first error.
 set -e
@@ -9,75 +13,74 @@ echo
 echo "Running $0..."
 echo
 
-# libcamera
-if [ ! -e /usr/local/bin/cam ]
+# --- Configuration ---
+WORKSPACE_NAME="pi_camera_ws"
+INSTALL_DIR="/usr/local"
+# The official RPi forks are required for Pi 5 camera support
+LIBCAMERA_REPO="https://github.com/raspberrypi/libcamera.git"
+LIBPISP_REPO="https://github.com/raspberrypi/libpisp.git"
+
+echo "Starting build and installation of Raspberry Pi Camera libraries..."
+
+# Dependencies.  Should be pretty much the minimal set required.
+echo "Installing build dependencies..."
+sudo apt update
+sudo apt install -y --no-install-recommends \
+    git cmake meson ninja-build build-essential libevent-dev \
+    python3-pip python3-yaml python3-ply libboost-dev libgnutls28-dev \
+    openssl libtiff-dev libdrm-dev libexpat1-dev libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev libjpeg-dev libpng-dev \
+    libsdl2-dev qt6-base-dev
+
+# libpisp
+if [ ! -e /usr/local/lib/libpisp.so ]
 then
     # Get the code.
-    cd ~/git
-    git clone https://git.libcamera.org/libcamera/libcamera.git
-    cd libcamera
-    # Dependencies.  Should be pretty much the minimal set required.
-    sudo apt update
-    sudo apt install -y --no-install-recommends \
-        python3-pip git python3-jinja2 \
-        libboost-dev \
-        libgnutls28-dev openssl libtiff5-dev pybind11-dev \
-        qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
-        meson cmake \
-        python3-yaml python3-ply \
-        libglib2.0-dev libgstreamer-plugins-base1.0-dev \
-        cmake libboost-program-options-dev libdrm-dev libexif-dev \
-        meson ninja-build
-
-
-        # g++ meson cmake ninja-build pkg-config \
-        # libyaml-dev python3-yaml python3-ply python3-jinja2 \
-        # libssl-dev openssl \
-        # libdw-dev libunwind-dev \
-        # libudev-dev libboost-dev \
-        # libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
-        # libevent-dev libexif-dev \
-        # libcamera-dev libjpeg-dev libtiff5-dev libpng-dev \
-        # libavcodec-dev libavdevice-dev libavformat-dev libswresample-dev \
-        # libgnutls28-dev openssl \
-        # qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
-        # python3-pip
-
-    # Install meson and related python packages.
-    sudo pip3 install pyyaml ply
-    sudo pip3 install --upgrade meson
+    if [ ! -e ~/git/libpisp ]
+    then
+        mkdir -p ~/git
+        cd ~/git
+        git clone $LIBPISP_REPO
+    fi
+    cd ~/git/libpisp
     # Build and install.
-    meson build --buildtype=release -Dpipelines=raspberrypi \
-        -Dipas=raspberrypi -Dv4l2=true -Dgstreamer=enabled \
-        -Dtest=false -Dlc-compliance=disabled -Dcam=enabled \
-        -Dqcam=enabled -Ddocumentation=disabled
+    meson setup build --buildtype=release
     ninja -C build
     sudo ninja -C build install
 fi
 
-# rpicam-apps
-if [ ! -e /usr/local/bin/rpicam-hello ]
+# libcamera
+if [ ! -e /usr/local/bin/qcam ]
 then
     # Get the code.
-    cd ~/git
-    git clone https://github.com/raspberrypi/rpicam-apps.git
-    cd rpicam-apps/
-    # Install dependencies.
-    sudo apt update
-    sudo apt install -y --no-install-recommends \
-        libboost-program-options-dev libdrm-dev libexif-dev \
-        meson ninja-build
-    # Build the code.
-    # NOTE: the last three options disable OpenCV, TensorFlow Lite and Hailo.  NOT TESTED with any enabled.
-    meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled
-    sudo meson install -C build
+    if [ ! -e ~/git/libcamera ]
+    then
+        mkdir -p ~/git
+        cd ~/git
+        git clone $LIBCAMERA_REPO
+    fi
+    cd ~/git/libcamera
+
+    meson setup build --buildtype=release \
+        -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp \
+        -Dv4l2=enabled -Dgstreamer=enabled -Dlc-compliance=enabled \
+        -Dcam=enabled -Dqcam=enabled -Ddocumentation=disabled \
+        -Dtest=false
+
+    ninja -C build
+    sudo ninja -C build install
+    # Update dynamic linker run-time bindings
+    sudo ldconfig
 fi
 
 # Add user to video group
 sudo adduser $USER video
 
 echo
-echo "Test using 'qcam' or 'libcamera-hello --qt-preview'."
+echo "To list available cameras, run: cam -l"
+echo "To see the video on screen, run: qcam"
+echo
+echo "You may need to log out and in again for video group changes to take effect."
 echo
 echo "$0 took $SECONDS seconds."
 echo
