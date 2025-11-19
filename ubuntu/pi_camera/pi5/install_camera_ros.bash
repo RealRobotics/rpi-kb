@@ -22,7 +22,7 @@ echo "Cloning and building camera_ros in ROS workspace..."
 # Install ROS 2 dependencies
 sudo apt install -y \
     python3-colcon-meson \
-    ros-$ROS_DISTRO-image-view \
+    ros-$ROS_DISTRO-image-view
 
 # Remove conflicting package
 sudo apt remove -y \

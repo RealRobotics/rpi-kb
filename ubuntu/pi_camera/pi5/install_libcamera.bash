@@ -14,8 +14,6 @@ echo "Running $0..."
 echo
 
 # --- Configuration ---
-WORKSPACE_NAME="pi_camera_ws"
-INSTALL_DIR="/usr/local"
 # The official RPi forks are required for Pi 5 camera support
 LIBCAMERA_REPO="https://github.com/raspberrypi/libcamera.git"
 LIBPISP_REPO="https://github.com/raspberrypi/libpisp.git"
@@ -23,7 +21,14 @@ LIBPISP_REPO="https://github.com/raspberrypi/libpisp.git"
 echo "Starting build and installation of Raspberry Pi Camera libraries..."
 
 # Remove the ROS default libcamera package (if present) to avoid conflicts
-sudo apt remove -y ros-$DISTRO-libcamera
+if [ "$ROS_DISTRO" != "" ]
+then
+    if [ $(dpkg -s ros-$ROS_DISTRO-libcamera &> /dev/null; echo $?) -eq 0 ]
+    then
+        echo "Removing conflicting ROS libcamera package..."
+        sudo apt remove -y ros-$ROS_DISTRO-libcamera
+    fi
+fi
 
 # Dependencies.  Should be pretty much the minimal set required.
 echo "Installing build dependencies..."
@@ -46,7 +51,7 @@ then
         git clone $LIBPISP_REPO
     fi
     cd ~/git/libpisp
-    # Build and install.
+    # Build and install
     meson setup build --buildtype=release
     ninja -C build
     sudo ninja -C build install
