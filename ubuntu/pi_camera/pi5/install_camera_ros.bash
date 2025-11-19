@@ -58,6 +58,6 @@ echo "  source ~/$WORKSPACE_NAME/install/setup.bash"
 echo "  (or add this line to your ~/.bashrc file to source it automatically)"
 echo "then run the ROS 2 camera nodes like this:"
 echo "  ros2 run camera_ros camera_node"
-echols
+echo
 echo "$0 took $SECONDS seconds."
 echo
