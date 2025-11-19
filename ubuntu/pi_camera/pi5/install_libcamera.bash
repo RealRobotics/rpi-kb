@@ -41,7 +41,7 @@ sudo apt install -y --no-install-recommends \
     libsdl2-dev qt6-base-dev
 
 # libpisp
-if [ ! -e /usr/local/lib/libpisp.so ]
+if [ ! -e /usr/local/lib/aarch64-linux-gnu/libpisp.so ]
 then
     # Get the code.
     if [ ! -e ~/git/libpisp ]
