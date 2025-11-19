@@ -17,6 +17,13 @@ then
     exit 1
 fi
 
+if [ "$ROS_DISTRO" == "" ]
+then
+    echo "Error: ROS 2 does not appear to be installed."
+    echo "Please install ROS 2 following the official instructions first."
+    exit 1
+fi
+
 echo "Cloning and building camera_ros in ROS workspace..."
 
 # Install ROS 2 dependencies
