@@ -22,6 +22,9 @@ LIBPISP_REPO="https://github.com/raspberrypi/libpisp.git"
 
 echo "Starting build and installation of Raspberry Pi Camera libraries..."
 
+# Remove the ROS default libcamera package (if present) to avoid conflicts
+sudo apt remove -y ros-$DISTRO-libcamera
+
 # Dependencies.  Should be pretty much the minimal set required.
 echo "Installing build dependencies..."
 sudo apt update

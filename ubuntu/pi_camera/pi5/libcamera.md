@@ -14,9 +14,23 @@ sudo apt-get remove xdg-desktop-portal-gnome
 
 Exit the terminal and return to the graphics screen, `Ctrl+Alt F1`, login and try again. This time it should open correctly.
 
-## Install libcamera apps and ROS camera app
+## Install libcamera apps
 
-Clone this repo on the Raspberry Pi.  Then download, build and install the code using the script `install_libcamera.bash`.  If you want to use ROS2 as well, then run the script `install_camera_ros.bash`.
+Clone this repo on the Raspberry Pi.
+
+```bash
+mkdir -p ~/git
+cd git
+git clone https://github.com/RealRobotics/rpi-kb.git
+```
+
+Then download, build and install the code using the script `install_libcamera.bash`.
+
+Test by running the app `qcam` which should find the camera and display an image.
+
+## Install the camera_ros package
+
+If you have previously installed ROS, you can just run the script `install_camera_ros.bash` to build and install the `camera_ros` package.
 
 ## References
 
@@ -26,4 +40,4 @@ and: <https://github.com/christianrauch/camera_ros#build-instructions>
 
 ## Last updated
 
-10 October 2025
+10 November 2025

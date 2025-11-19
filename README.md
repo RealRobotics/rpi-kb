@@ -37,19 +37,18 @@ __However, due to the often lax security on Raspberry Pis caused by poor passwor
 
 The documentation for connecting to Eduroam is [here](eduroam/eduroam.md).
 
-## Libcamera on Ubuntu 22.04LTS
+## Ubuntu on the Pi
 
-ROS Humble and Iron both use Ubuntu 22.04LTS as their OS.  Unfortunately, the RPi camera v3 needs a later version of the Debian OS and kernel.  This makes things messy!
-To install `libcamera` and the necessary tools, please see this [README](ubuntu/README.md).
+When using ROS on a Raspberry Pi, it is simplest to use Ubuntu as the OS.  Instructions on how to set up Ubuntu and the cameras can be found [here](ubuntu/install_ubuntu.md).
 
 ## Networking
 
 This section is not Raspberry Pi specific but might help someone to use a robot using a Raspberry Pi in difficult circumstances.
 
-* [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
+- [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
 
 ## Acknowledgments
 
-&copy; 2022-2023, University of Leeds.
+&copy; 2022-2025, University of Leeds.
 
 The author, A. Blight, has asserted his moral rights.

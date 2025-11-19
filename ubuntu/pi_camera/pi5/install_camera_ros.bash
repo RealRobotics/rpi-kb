@@ -1,23 +1,63 @@
-# Install ROS 2 Camera Packages
+#!/bin/bash
+#
+# Script to build and install the ROS 2 camera_ros package for Ubuntu 24.04
+# (Jazzy) on a Raspberry Pi 5.
+#
+# NOTE: This script assumes you have already installed ROS 2 Jazzy following
+# the official instructions.
 
-sudo apt install -y python3-colcon-meson
+WORKSPACE_NAME="pi_camera_ws"
+CAMERA_ROS_REPO="https://github.com/christianrauch/camera_ros.git"
 
-# create workspace
-mkdir -p ~/camera_ws/src
-cd ~/camera_ws/src
+# Check that the correct libcamera libraries are installed
+if [ ! -e /usr/local/bin/qcam ]
+then
+    echo "Error: libcamera does not appear to be installed."
+    echo "Please run install_libcamera.bash first to build and install libcamera."
+    exit 1
+fi
 
-# check out libcamera
-sudo apt -y install python3-colcon-meson
-# Option A: official upstream
-git clone https://git.libcamera.org/libcamera/libcamera.git
-# Option B: raspberrypi fork with support for newer camera modules
-# git clone https://github.com/raspberrypi/libcamera.git
+echo "Cloning and building camera_ros in ROS workspace..."
 
-# check out this camera_ros repository
-git clone https://github.com/christianrauch/camera_ros.git
+# Install ROS 2 dependencies
+sudo apt install -y \
+    python3-colcon-meson \
+    ros-$ROS_DISTRO-image-view \
 
-# resolve binary dependencies and build workspace
+# Remove conflicting package
+sudo apt remove -y \
+    ros-$ROS_DISTRO-libcamera
+
+# Put in softlinks to ROS libcamera headers for camera_ros to find them when it builds
+if [ ! -e /opt/ros/$ROS_DISTRO/include/libcamera ]
+then
+    sudo ln -s /usr/local/include/libcamera /opt/ros/$ROS_DISTRO/include/libcamera
+fi
+
+# Create workspace
+mkdir -p ~/$WORKSPACE_NAME/src
+cd ~/$WORKSPACE_NAME/src
+
+# Clone camera_ros
+if [ ! -e camera_ros ]
+then
+    git clone $CAMERA_ROS_REPO
+fi
+
+# Build camera_ros
 source /opt/ros/$ROS_DISTRO/setup.bash
-cd ~/camera_ws/
+cd ~/$WORKSPACE_NAME
+rm -rf build install log
 rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO --skip-keys=libcamera
 colcon build --event-handlers=console_direct+
+
+echo
+echo "camera_ros has been built and installed in the workspace ~/$WORKSPACE_NAME."
+echo "To use it, source the workspace setup file:"
+echo "  source ~/$WORKSPACE_NAME/install/setup.bash"
+echo "  (or add this line to your ~/.bashrc file to source it automatically)"
+echo "then run the ROS 2 camera nodes like this:"
+echo "  ros2 run camera_ros camera_node"
+echols
+echo "$0 took $SECONDS seconds."
+echo
