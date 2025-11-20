@@ -32,6 +32,8 @@ Test by running the app `qcam` which should find the camera and display an image
 
 If you have previously installed ROS, you can just run the script `install_camera_ros.bash` to build and install the `camera_ros` package.
 
+If you want build this in an existing workspace, modify the `WORKSPACE_NAME` variable at the top of the file `install_camera_ros.bash` as needed.
+
 ## References
 
 Based on: <https://github.com/TanmayChhatbar/ros2_car/blob/feature/camera_setup/README_ELI5.md>.
@@ -40,4 +42,4 @@ and: <https://github.com/christianrauch/camera_ros#build-instructions>
 
 ## Last updated
 
-10 November 2025
+20 November 2025
