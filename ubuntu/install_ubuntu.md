@@ -44,8 +44,18 @@ Save and exit and reboot.
 
 ## Libcamera
 
-Raspberry Pis use a custom version of the Libcamera library that are not provided with Ubuntu, so we have to build them ourselves.  There are a few different ways I have done this and they are:
+Raspberry Pis use a custom version of the libcamera library that is not provided with Ubuntu, even as a new module, so we have to build it ourselves.  There are a few different ways I have done this, and they are:
 
 * [Ubuntu 24.04LTS on a Pi5 with Pi Camera Module 3](ubuntu/pi_camera/pi5/libcamera.md)
 * [Ubuntu 22.04LTS on a Pi4 with Pi Camera Module 2](ubuntu/pi_camera/pi5/libcamera.md)
 * [Ubuntu 22.04LTS on a Pi4 with Arducam](ubuntu/pi_camera/pi5/libcamera.md)
+
+### Why doesn't Ubuntu ship with the Raspberry Pi version of libcamera?
+
+A good question.  My guess is that there could have been a conversation that went like this.
+
+"So we need to build Ubuntu for the Raspberry Pi. That's an ARM chip, so let's build that."
+"Oops!.  It doesn't work, so lets patch the kernel."
+"Great, it builds.  Ship it!"
+
+Then all the forums complain first time they try to use a camera, and no-one has time to fix the problem.
