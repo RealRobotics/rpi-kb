@@ -47,8 +47,12 @@ This section is not Raspberry Pi specific but might help someone to use a robot 
 
 - [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
 
+## Slideshow software
+
+Using an old Raspberry Pi for showing photos at exhibitions means that you don't have to leave your laptop running all day.  Installation details can be found [here](slideshow.md).
+
 ## Acknowledgments
 
-&copy; 2022-2025, University of Leeds.
+&copy; 2022-2026, University of Leeds.
 
 The author, A. Blight, has asserted his moral rights.
