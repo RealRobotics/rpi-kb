@@ -47,6 +47,10 @@ This section is not Raspberry Pi specific but might help someone to use a robot 
 
 - [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
 
+## Slideshows
+
+Using an old Raspberry Pi for exhibitions means that you don't have to leave your laptop running all day.  Installation details can be found [here](slideshows.md).
+
 ## Acknowledgments
 
 &copy; 2022-2025, University of Leeds.
