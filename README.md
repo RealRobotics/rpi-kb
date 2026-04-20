@@ -2,15 +2,6 @@
 
 This repo contains information on how to set up Raspberry Pis for work with robotics and measurement platforms at the University of Leeds.
 
-- [Real Robotics Raspberry Pi knowledge base](#real-robotics-raspberry-pi-knowledge-base)
-  - [SD card images](#sd-card-images)
-    - [Back up and restore an image](#back-up-and-restore-an-image)
-    - [Customising Ubuntu 22.04LTS for the Raspberry Pi](#customising-ubuntu-2204lts-for-the-raspberry-pi)
-  - [Connect to Eduroam](#connect-to-eduroam)
-  - [Libcamera on Ubuntu 22.04LTS](#libcamera-on-ubuntu-2204lts)
-  - [Networking](#networking)
-  - [Acknowledgments](#acknowledgments)
-
 ## SD card images
 
 Raspberry Pi provides a nice imager tool to download and create an SD card image for the operating system (OS) along with great instructions, so use them! [See here for details.](https://www.raspberrypi.com/software/)
@@ -46,6 +37,7 @@ When using ROS on a Raspberry Pi, it is simplest to use Ubuntu as the OS.  Instr
 This section is not Raspberry Pi specific but might help someone to use a robot using a Raspberry Pi in difficult circumstances.
 
 - [Networking in buried pipes.](networking/BuriedPipeNetworkSetup.md)
+- [General networking and SSH](netowrking/general_networking.md)
 
 ## Slideshow software
 
