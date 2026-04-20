@@ -10,7 +10,7 @@ The Raspberry Pis can be accessed here: <https://connect.raspberrypi.com/devices
 
 ## GitHub
 
-When coding on a PC and testing on our RRLab-5G network, port 80 is block so we need to use port 443 instead.  This is how you set it up on the Pi (or your Linux PC).
+When coding on a PC and testing on our RRLab-5G network, port 80 is blocked so we need to use port 443 instead.  This is how you set it up on the Pi (or your Linux PC).
 
 1. [Create an SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for the data loggers so we can access Git.
 
