@@ -59,3 +59,16 @@ A good question.  My guess is that there could have been a conversation that wen
 "Great, it builds.  Ship it!"
 
 Then all the forums complain first time they try to use a camera, and no-one has time to fix the problem.
+
+### Terminal not opening bug
+
+There is an annoying bug that significantly delays the start up of the terminal application in Ubuntu on the Pi.  The fix is simple:
+
+```bash
+sudo apt remove xdg-desktop-portal-gnome
+reboot
+```
+
+This is clearly a bug, so maybe on the next LTS, this should be fixed.
+
+Reference: <https://askubuntu.com/questions/1518348/ubuntu-24-04-terminal-has-stopped-opening>
